@@ -156,29 +156,6 @@ namespace MFlight.Demo
 
         private void FixedUpdate()
         {
-            // capSpeed();
-            // if(isEnabled)
-            // {
-            //     if(stuck)
-            //     {
-            //         rigid.AddRelativeForce(Vector3.forward * thrust * forceMult, ForceMode.Force);
-            //         rigid.AddRelativeTorque(new Vector3(turnTorque.x * pitch * pitchMultipler,
-            //                                             turnTorque.y * yaw * yawMultipler,
-            //                                             -turnTorque.z * roll * rollMultipler) * forceMult,
-            //                                             ForceMode.Force);
-            //     }
-            //     else
-            //     {
-            //         rigid.AddRelativeForce(Vector3.forward * thrust * forceMult, ForceMode.Force);
-            //         rigid.AddRelativeTorque(new Vector3(turnTorque.x * pitch * pitchMultipler,
-            //                                             turnTorque.y * yaw * yawMultipler,
-            //                                             -turnTorque.z * roll * rollMultipler) * forceMult,
-            //                                             ForceMode.Force);
-            //     }
-            // }
-            // Debug.Log(stuck);
-            // // Ultra simple flight where the plane just gets pushed forward and manipulated
-            // // with torques to turn.
 
             capSpeed();
             if (isEnabled)

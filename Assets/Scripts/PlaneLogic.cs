@@ -8,6 +8,7 @@ public class PlaneLogic : MonoBehaviour
     public Transform playerPoint;
     private Rigidbody rb;
     private RoomManager roomManager;
+    private BombLogic bombLogic;
 
     public GameObject MouseFlightRig;
     public GameObject MouseFlightHud;
@@ -18,6 +19,7 @@ public class PlaneLogic : MonoBehaviour
     private void Start() 
     {
         roomManager = GameObject.Find("RoomManager").GetComponent<RoomManager>();
+        bombLogic = GameObject.Find("BombShoot").GetComponent<BombLogic>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -28,14 +30,12 @@ public class PlaneLogic : MonoBehaviour
             ExitPilot();
         }
 
-        // if(plane.GetComponent<MFlight.Demo.Plane>().isEnabled)
-        // {
-        //     Debug.Log("Plane is enabled");
-        //     if(!animation.isPlaying)
-        //     {
-        //         animation.Play(propeller.name);
-        //     }
-        // }
+        //Just a test to see if bomb drops
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("Drop Bomb");
+            bombLogic.dropBomb();
+        }
     }
 
     private void FixedUpdate() 
