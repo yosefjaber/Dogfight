@@ -20,7 +20,7 @@ public class PlaneLogic : MonoBehaviour
     {
         roomManager = GameObject.Find("RoomManager").GetComponent<RoomManager>();
         bombLogic = GameObject.Find("BombShoot").GetComponent<BombLogic>();
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>(); 
     }
 
     private void Update() 
