@@ -204,6 +204,7 @@ namespace MFlight.Demo
 
         private void OnTriggerStay(Collider other)
         {
+            string otherColliderName = collision.collider.name
             stuck = true;
         }
 
