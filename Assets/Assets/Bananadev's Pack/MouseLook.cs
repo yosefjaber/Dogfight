@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour
     public Vector2 clampInDegrees = new Vector2(360, 180);
     public bool lockCursor = true;
     [Space]
-    private Vector2 sensitivity = new Vector2(2, 2);
+    public Vector2 sensitivity = new Vector2(2, 2); // Use this for sensitivity adjustments
     [Space]
     public Vector2 smoothing = new Vector2(3, 3);
 
@@ -39,7 +39,6 @@ public class MouseLook : MonoBehaviour
         
         if (lockCursor)
             LockCursor();
-
     }
 
     public void LockCursor()
@@ -56,7 +55,7 @@ public class MouseLook : MonoBehaviour
         var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
 
         // Get raw mouse input for a cleaner reading on more sensitive mice.
-        mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X") * sensitivity.x, Input.GetAxisRaw("Mouse Y") * sensitivity.y);
 
         // Scale input against the sensitivity setting and multiply that against the smoothing value.
         mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
