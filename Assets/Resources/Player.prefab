@@ -166,12 +166,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 2.4320786, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 414579287690732806}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &549802039065870503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clampInDegrees: {x: 360, y: 180}
   lockCursor: 1
+  sensitivity: {x: 2, y: 2}
   smoothing: {x: 0.25, y: 0.25}
   characterBody: {fileID: 8997724663405909963}
   scoped: 0
