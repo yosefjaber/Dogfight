@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlaneLogic : MonoBehaviour
 {
     public GameObject planeCamera;
+    public GameObject backCamera;
     public Transform playerPoint;
     private Rigidbody rb;
     private RoomManager roomManager;
@@ -35,6 +36,20 @@ public class PlaneLogic : MonoBehaviour
         {
             Debug.Log("Drop Bomb");
             bombLogic.dropBomb();
+        }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if(backCamera.activeSelf)
+            {
+                backCamera.SetActive(false);
+                planeCamera.SetActive(true);
+            }
+            else
+            {
+                backCamera.SetActive(true);
+                planeCamera.SetActive(false);
+            }
         }
     }
 
