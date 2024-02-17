@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clampInDegrees: {x: 360, y: 180}
   lockCursor: 1
-  sensitivity: {x: 2, y: 2}
+  sensitivity: {x: 3, y: 3}
   smoothing: {x: 0.25, y: 0.25}
   characterBody: {fileID: 8997724663405909963}
   scoped: 0
