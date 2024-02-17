@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.Numerics;
 
 public class BombLogic : MonoBehaviour
 {
     public Transform bombShoot;
     public GameObject bomb;
+    public GameObject plane;
+    public GameObject leftGear;
+    public GameObject rightGear;
+    public GameObject planeBody;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,13 +27,20 @@ public class BombLogic : MonoBehaviour
 
     public void dropBomb()
     {
-        // PhotonNetwork.Instantiate(plane.name, spawnPlanePoint.position, Quaternion.identity);
-        PhotonNetwork.Instantiate(bomb.name, bombShoot.position, Quaternion.identity);
+        GameObject bombInstance = PhotonNetwork.Instantiate(this.bomb.name, bombShoot.position, UnityEngine.Quaternion.Euler(90, 0, 0), 0);
+        
+        Explode explodeComponent = bombInstance.GetComponent<Explode>();
+        if (explodeComponent != null)
+        {
+            explodeComponent.plane = this.plane;
+            explodeComponent.leftGear = this.leftGear;
+            explodeComponent.rightGear = this.rightGear;
+            explodeComponent.planeBody = this.planeBody;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("Bomb hit something");
-        //Destroy(this.gameObject);
     }
 }

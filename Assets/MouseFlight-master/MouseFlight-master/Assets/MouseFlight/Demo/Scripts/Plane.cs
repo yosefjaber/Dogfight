@@ -204,8 +204,16 @@ namespace MFlight.Demo
 
         private void OnTriggerStay(Collider other)
         {
-            //string otherColliderName = collision.collider.name
-            stuck = true;
+            string otherColliderName = other.GetComponent<Collider>().name;
+            Debug.Log(otherColliderName);
+            if(otherColliderName == "BombReal(Clone)")
+            {
+                //Do nothing
+            }
+            else
+            {
+                stuck = true;
+            }
         }
 
         private void OnTriggerExit(Collider other) {

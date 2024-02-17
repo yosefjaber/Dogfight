@@ -1153,6 +1153,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombShoot: {fileID: 7351091538638190179}
   bomb: {fileID: 2458204219821232053, guid: d26737a95fb4801488d4801aa1dff986, type: 3}
+  plane: {fileID: 1402859973316142447}
+  leftGear: {fileID: 1123321881998273943}
+  rightGear: {fileID: 9110029702617884324}
+  planeBody: {fileID: 2069432619755478851}
 --- !u!1 &1387253384286020653
 GameObject:
   m_ObjectHideFlags: 0

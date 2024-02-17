@@ -13,7 +13,6 @@ public class PlayPropeller : MonoBehaviour
     {
         if(plane.GetComponent<MFlight.Demo.Plane>().isEnabled)
         {
-            Debug.Log("Plane is enabled");
             propeller.transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
         }
     }
