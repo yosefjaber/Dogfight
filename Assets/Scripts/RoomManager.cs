@@ -45,6 +45,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public float detailScale = 20f;
     [Range(0f, 1f)]
     public float chanceOfSpawn = 0.5f;
+    [Range(0f, 1f)]
+    public float chanceofBombSpawn = 0.1f;
     public float offSet = 5f;
     public bool spawnAssets = true;
 
@@ -131,7 +133,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         //The true way to do this Gojo would be proud
         int numSpawned = 0;
+        int caseBomb = 0;
         int seed = PhotonNetwork.CurrentRoom.Name.GetHashCode();
+        int assetIndex = 0;
 
         Random.InitState(seed); // Initialize the random number generator with the seed
 
@@ -146,15 +150,37 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     float randomRotation = Random.Range(0f, 360f);
                         // Spawn assets using the client's PhotonNetwork.Instantiate method
                         //PhotonNetwork.Instantiate(assets[Random.Range(3, assets.Length)].name, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
-                        int assetIndex = Random.Range(0, assets.Length);
+                        assetIndex = Random.Range(0, assets.Length);
                         GameObject assetPrefab = assets[assetIndex]; // Assuming assets[] is an array of GameObjects (prefabs)
-                        Instantiate(assetPrefab, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
-                        numSpawned++;
+
+                        if(assetIndex == 14)
+                        {
+                            if(Random.Range(0f, 1f) < chanceofBombSpawn)
+                            {
+                                // Spawn a case bomb
+                                Instantiate(assetPrefab, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
+                                numSpawned++;
+                                caseBomb++;
+                            }
+                            else 
+                            {
+                                assetIndex = Random.Range(0, assets.Length - 1);
+                                assetPrefab = assets[assetIndex];
+                                Instantiate(assetPrefab, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
+                                numSpawned++;
+                            }
+                        }
+                        else 
+                        {
+                            Instantiate(assetPrefab, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
+                            numSpawned++;
+                        }
                     }
                 }
             }
 
             Debug.Log("Spawned " + numSpawned + " assets");
+            Debug.Log("Spawned " + caseBomb + " case bombs");
             spawnAssets = false;
     }
 }

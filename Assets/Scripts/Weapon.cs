@@ -140,6 +140,13 @@ public class Weapon : MonoBehaviour
 
                 hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage);
             }
+
+            if(hit.transform.gameObject.GetComponent<CaseBomb>())
+            {
+                CaseBomb caseBomb = hit.transform.gameObject.GetComponent<CaseBomb>();
+
+                caseBomb.explode();
+            }
         }
     }
 
