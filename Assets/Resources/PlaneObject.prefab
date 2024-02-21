@@ -3503,6 +3503,7 @@ MonoBehaviour:
   planeCamera: {fileID: 2992464735493241191}
   MosuseFlightRig: {fileID: 5756781039260197230}
   MouseFlightHud: {fileID: 1450946671192357220}
+  backCamera: {fileID: 8196607962599574017}
 --- !u!1 &7225370406698020950
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class EnterPlaneLogic : MonoBehaviour
     public GameObject planeCamera;
     public GameObject MosuseFlightRig;
     public GameObject MouseFlightHud;
+    public GameObject backCamera;
 
     //private bool onPlane = false;
     [Space]
@@ -37,6 +38,7 @@ public class EnterPlaneLogic : MonoBehaviour
         MouseFlightHud.SetActive(true);
         MosuseFlightRig.SetActive(true);
         planeCamera.SetActive(true);
+        backCamera.SetActive(false);
         plane.GetComponent<PlaneLogic>().enabled = true;
         plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(true);
         plane.GetComponent<Rigidbody>().useGravity = false;
