@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaneLogic : MonoBehaviour
@@ -10,6 +11,9 @@ public class PlaneLogic : MonoBehaviour
     private Rigidbody rb;
     private RoomManager roomManager;
     private BombLogic bombLogic;
+    public AirplaneGun leftAirplaneGun;
+    public AirplaneGun rightAirplaneGun; 
+    
 
     public GameObject MouseFlightRig;
     public GameObject MouseFlightHud;
@@ -50,6 +54,12 @@ public class PlaneLogic : MonoBehaviour
                 backCamera.SetActive(true);
                 planeCamera.SetActive(false);
             }
+        }
+
+        if(Input.GetMouseButton(0))
+        {
+            leftAirplaneGun.Shoot();
+            rightAirplaneGun.Shoot();
         }
     }
 

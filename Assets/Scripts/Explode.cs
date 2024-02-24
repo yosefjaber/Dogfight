@@ -29,7 +29,6 @@ public class Explode : MonoBehaviour
     {
         if (other.gameObject != plane && other.gameObject != leftGear && other.gameObject != rightGear && other.gameObject != planeBody)
         {
-            Debug.Log(other.gameObject.name);
             PhotonNetwork.Instantiate(explosion.name, transform.position, Quaternion.identity);
             // Optionally, destroy the bomb game object to simulate the explosion effect
             PhotonNetwork.Destroy(gameObject);

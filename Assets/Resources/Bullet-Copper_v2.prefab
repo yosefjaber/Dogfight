@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8316909851529710013}
   - component: {fileID: 5396727788317285653}
   - component: {fileID: 4198329106674212821}
+  - component: {fileID: 4266477873901051977}
   m_Layer: 0
   m_Name: Bullet-Copper_v2
   m_TagString: Untagged
@@ -106,7 +107,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -151,6 +152,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &4266477873901051977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881591329238335834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ad31a6cca0b96b9b08a8d828a89395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletExplosion: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
 --- !u!1 &3158465467671768288
 GameObject:
   m_ObjectHideFlags: 0

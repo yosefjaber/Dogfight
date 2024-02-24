@@ -39,9 +39,4 @@ public class BombLogic : MonoBehaviour
             explodeComponent.planeBody = this.planeBody;
         }
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        Debug.Log("Bomb hit something");
-    }
 }
