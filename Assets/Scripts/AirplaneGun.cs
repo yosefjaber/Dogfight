@@ -5,6 +5,7 @@ using Photon.Pun;
 public class AirplaneGun : MonoBehaviour
 {
     public GameObject gunBullet;
+    public GameObject plane;
     public Transform bulletSpawnPoint;
     public float bulletSpeed = 1000f;
     public float shootingRate = 0.5f;
@@ -32,14 +33,15 @@ public class AirplaneGun : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = PhotonNetwork.Instantiate(gunBullet.name, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        // Correct instantiation with Quaternion multiplication for the desired rotation
+        GameObject bullet = PhotonNetwork.Instantiate(gunBullet.name, bulletSpawnPoint.position, plane.transform.rotation * Quaternion.Euler(90, 0, 0));
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
 
-        rb.AddForce(Vector3.up * 1000);
+        // Set velocity directly to move the bullet forward, assuming bulletSpawnPoint is correctly oriented
         rb.velocity = bulletSpawnPoint.forward * bulletSpeed;
 
-        Destroy(bullet, 5f);
+        Destroy(bullet, 5f); // Cleanup to avoid excessive GameObjects in the scene
 
         Debug.Log("Gun Fired");
     }
