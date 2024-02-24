@@ -7,6 +7,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager instance;
+    public RoomList roomList;
     //private static bool spawnedAssets = false;
 
     public GameObject player;
@@ -64,8 +65,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void JoinRoomButtonPressed()
     {
         Debug.Log("Connecting...");
-
-        PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
+        int roomsWithSameName = roomList.checkRoomAgainst(roomNameToJoin);
+        if(roomsWithSameName == 0)
+        {
+            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
+        }
+        else
+        {
+            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin + " (" + roomsWithSameName + ")", null, null);
+        }
 
         nameUI.SetActive(false);
         connectingUI.SetActive(true);
