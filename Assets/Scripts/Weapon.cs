@@ -72,7 +72,6 @@ public class Weapon : MonoBehaviour
             nextFire -= Time.deltaTime;
         }
 
-
         if(Input.GetButton("Fire1") && nextFire <= 0 && ammo > 0 && !animation.isPlaying)
         {
             nextFire = 1 / fireRate;
