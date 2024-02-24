@@ -2398,7 +2398,7 @@ Transform:
   m_GameObject: {fileID: 2582865370315331869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.505, y: 1.138, z: 5.87}
+  m_LocalPosition: {x: 4.5, y: 1, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2417,6 +2417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunBullet: {fileID: 1881591329238335834, guid: 539357cd8f209706c9570d349a53688c, type: 3}
+  plane: {fileID: 1402859973316142447}
   bulletSpawnPoint: {fileID: 6741421328547747870}
   bulletSpeed: 50
   shootingRate: 0.5
@@ -4021,7 +4022,7 @@ Transform:
   m_GameObject: {fileID: 8271912366098819009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 1, z: 5.4}
+  m_LocalPosition: {x: -4.5, y: 1, z: 7}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4040,6 +4041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunBullet: {fileID: 1881591329238335834, guid: 539357cd8f209706c9570d349a53688c, type: 3}
+  plane: {fileID: 1402859973316142447}
   bulletSpawnPoint: {fileID: 2577494243877989939}
   bulletSpeed: 50
   shootingRate: 0.5
