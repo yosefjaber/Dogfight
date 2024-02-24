@@ -1003,6 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9ca937b02e17140a1453db09d85602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomList: {fileID: 1319116217}
   player: {fileID: 8997724663405909963, guid: 941c629fbc0a9264eba659b73b5f018d, type: 3}
   spawnPoints:
   - {fileID: 1686667999}
@@ -1041,7 +1042,7 @@ MonoBehaviour:
   - {fileID: 467951067566595012, guid: 4d77b47f753caf24493215b264f25ad6, type: 3}
   - {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6, type: 3}
   - {fileID: 4405649961020431350, guid: 45a26770f1ad2cba1b0c44967e9907f4, type: 3}
-  detailScale: 65
+  detailScale: 60
   chanceOfSpawn: 0.75
   chanceofBombSpawn: 0.1
   offSet: 15
@@ -7911,7 +7912,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 328716082}
   m_HandleRect: {fileID: 328716081}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
