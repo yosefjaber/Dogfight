@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4198329106674212821}
   - component: {fileID: 4266477873901051977}
   m_Layer: 0
-  m_Name: Bullet-Copper_v2
+  m_Name: GunBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

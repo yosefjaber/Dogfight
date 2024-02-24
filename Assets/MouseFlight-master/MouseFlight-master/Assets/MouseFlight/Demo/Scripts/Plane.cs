@@ -163,7 +163,8 @@ namespace MFlight.Demo
                 if (stuck)
                 {
                     // Example: Apply upward force to lift the plane
-                    rigid.AddRelativeForce(-Vector3.forward * thrust * forceMult * 0.4f, ForceMode.Impulse);
+                    //original multiplier at 0.4 changed to 0.8
+                    rigid.AddRelativeForce(-Vector3.forward * thrust * forceMult * 0.8f, ForceMode.Impulse);
                     
                     // Optionally, apply less or opposite torque
                     // rigid.AddRelativeTorque(new Vector3(-turnTorque.x * pitch * pitchMultipler,
@@ -206,7 +207,7 @@ namespace MFlight.Demo
         {
             string otherColliderName = other.GetComponent<Collider>().name;
             Debug.Log(otherColliderName);
-            if(otherColliderName == "BombReal(Clone)")
+            if(otherColliderName == "BombReal(Clone)" || otherColliderName == "GunBullet(Clone)")
             {
                 //Do nothing
             }
