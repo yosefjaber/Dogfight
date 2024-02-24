@@ -1440,6 +1440,8 @@ MonoBehaviour:
   planeCamera: {fileID: 2992464735493241191}
   backCamera: {fileID: 8196607962599574017}
   playerPoint: {fileID: 5804167249814143399}
+  leftAirplaneGun: {fileID: 5609023961450180602}
+  rightAirplaneGun: {fileID: 6415024131731172764}
   MouseFlightRig: {fileID: 5756781039260197230}
   MouseFlightHud: {fileID: 1450946671192357220}
   plane: {fileID: 1402859973316142447}
@@ -2398,7 +2400,7 @@ Transform:
   m_GameObject: {fileID: 2582865370315331869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 1, z: 7}
+  m_LocalPosition: {x: 4.5, y: 1, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2420,7 +2422,7 @@ MonoBehaviour:
   plane: {fileID: 1402859973316142447}
   bulletSpawnPoint: {fileID: 6741421328547747870}
   bulletSpeed: 50
-  shootingRate: 0.5
+  shootingRate: 0.125
 --- !u!1 &2992464735493241191
 GameObject:
   m_ObjectHideFlags: 0
@@ -4022,7 +4024,7 @@ Transform:
   m_GameObject: {fileID: 8271912366098819009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 1, z: 7}
+  m_LocalPosition: {x: -4.5, y: 1, z: 12}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4044,7 +4046,7 @@ MonoBehaviour:
   plane: {fileID: 1402859973316142447}
   bulletSpawnPoint: {fileID: 2577494243877989939}
   bulletSpeed: 50
-  shootingRate: 0.5
+  shootingRate: 0.125
 --- !u!1 &8511868607995074506
 GameObject:
   m_ObjectHideFlags: 0
