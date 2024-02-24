@@ -4,6 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 
 public class RoomList : MonoBehaviourPunCallbacks
 {
@@ -112,4 +115,17 @@ public class RoomList : MonoBehaviourPunCallbacks
         gameObject.SetActive(false);
     }
 
+    //Checks if other rooms have the same name and return the number of rooms with the same name and if there are no rooms with the same name, return 0
+    public int checkRoomAgainst(String room)
+    {
+        int count = 0;
+        foreach(var roomInfo in cachedRoomList)
+        {
+            if(roomInfo.Name == room)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 }
