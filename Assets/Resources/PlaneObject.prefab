@@ -2421,8 +2421,8 @@ MonoBehaviour:
   gunBullet: {fileID: 1881591329238335834, guid: 539357cd8f209706c9570d349a53688c, type: 3}
   plane: {fileID: 1402859973316142447}
   bulletSpawnPoint: {fileID: 6741421328547747870}
-  bulletSpeed: 50
-  shootingRate: 0.125
+  bulletSpeed: 75
+  shootingRate: 0.0625
 --- !u!1 &2992464735493241191
 GameObject:
   m_ObjectHideFlags: 0
@@ -4045,8 +4045,8 @@ MonoBehaviour:
   gunBullet: {fileID: 1881591329238335834, guid: 539357cd8f209706c9570d349a53688c, type: 3}
   plane: {fileID: 1402859973316142447}
   bulletSpawnPoint: {fileID: 2577494243877989939}
-  bulletSpeed: 50
-  shootingRate: 0.125
+  bulletSpeed: 75
+  shootingRate: 0.0625
 --- !u!1 &8511868607995074506
 GameObject:
   m_ObjectHideFlags: 0
