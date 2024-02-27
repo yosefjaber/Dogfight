@@ -66,6 +66,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connecting...");
         int roomsWithSameName = roomList.checkRoomAgainst(roomNameToJoin);
+        Debug.Log("Rooms with same name: " + roomsWithSameName);
         if(roomsWithSameName == 0)
         {
             PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);

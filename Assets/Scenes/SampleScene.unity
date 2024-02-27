@@ -339,7 +339,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1602190932}
   m_HandleRect: {fileID: 1602190931}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 141381947}
   - component: {fileID: 141381946}
   m_Layer: 5
-  m_Name: KD (1)
+  m_Name: 'KD '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3219,7 +3219,7 @@ GameObject:
   - component: {fileID: 598376436}
   - component: {fileID: 598376437}
   m_Layer: 5
-  m_Name: Score 1
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4895,7 +4895,7 @@ GameObject:
   - component: {fileID: 1114040582}
   - component: {fileID: 1114040583}
   m_Layer: 5
-  m_Name: KD (1)
+  m_Name: KD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5217,7 +5217,7 @@ GameObject:
   - component: {fileID: 1216330677}
   - component: {fileID: 1216330676}
   m_Layer: 5
-  m_Name: Score 1
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5485,7 +5485,7 @@ GameObject:
   - component: {fileID: 1258205908}
   - component: {fileID: 1258205909}
   m_Layer: 5
-  m_Name: Player Name 1
+  m_Name: Player Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7313,7 +7313,7 @@ GameObject:
   - component: {fileID: 1554633375}
   - component: {fileID: 1554633374}
   m_Layer: 5
-  m_Name: Player Name 1
+  m_Name: Player Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8020,7 +8020,7 @@ GameObject:
   - component: {fileID: 1620764972}
   - component: {fileID: 1620764971}
   m_Layer: 5
-  m_Name: KD (1)
+  m_Name: KD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8279,7 +8279,7 @@ GameObject:
   - component: {fileID: 1653933604}
   - component: {fileID: 1653933603}
   m_Layer: 5
-  m_Name: Score 1
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8681,7 +8681,7 @@ GameObject:
   - component: {fileID: 1680070948}
   - component: {fileID: 1680070947}
   m_Layer: 5
-  m_Name: KD (1)
+  m_Name: KD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9264,7 +9264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1816957743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9277,41 +9277,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928a3ea156ee0f54789f69184155498b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomManager: {fileID: 0}
   playersHolder: {fileID: 804664228}
   refreshRate: 1
   slots:
-  - {fileID: 0}
-  - {fileID: 1464211971}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1555262119}
+  - {fileID: 369341262}
+  - {fileID: 582555005}
+  - {fileID: 2045062064}
   scoreTexts:
+  - {fileID: 1233255769}
   - {fileID: 1679559726}
   - {fileID: 598376437}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2038709450}
+  - {fileID: 1810948944}
+  - {fileID: 1653933603}
+  - {fileID: 1883133543}
+  - {fileID: 1764146497}
+  - {fileID: 1216330676}
+  - {fileID: 708888091}
+  - {fileID: 566043478}
+  - {fileID: 2090797031}
   nameTexts:
+  - {fileID: 1470180064}
   - {fileID: 215329807}
   - {fileID: 1258205909}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2080159819}
+  - {fileID: 24142162}
+  - {fileID: 2080562455}
+  - {fileID: 1517854266}
+  - {fileID: 1472178802}
+  - {fileID: 1992887768}
+  - {fileID: 137807822}
+  - {fileID: 865220815}
+  - {fileID: 1554633374}
   kdTexts:
+  - {fileID: 289137094}
   - {fileID: 1600812349}
   - {fileID: 1114040583}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 352475063}
+  - {fileID: 564022612}
+  - {fileID: 1620764971}
+  - {fileID: 749590924}
+  - {fileID: 1555119922}
+  - {fileID: 1680070947}
+  - {fileID: 1655697053}
+  - {fileID: 622442559}
+  - {fileID: 141381946}
 --- !u!114 &1816957744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10266,7 +10277,7 @@ GameObject:
   - component: {fileID: 1992887769}
   - component: {fileID: 1992887768}
   m_Layer: 5
-  m_Name: Player Name 1
+  m_Name: Player Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11068,7 +11079,7 @@ GameObject:
   - component: {fileID: 2080562456}
   - component: {fileID: 2080562455}
   m_Layer: 5
-  m_Name: Player Name 1
+  m_Name: Player Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11202,7 +11213,7 @@ GameObject:
   - component: {fileID: 2090797032}
   - component: {fileID: 2090797031}
   m_Layer: 5
-  m_Name: Score 1
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
