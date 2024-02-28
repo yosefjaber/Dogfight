@@ -26,6 +26,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public string roomNameToJoin = "test";
     public bool ClientRender = false;
 
+    public bool joiningRoom = true;
+
 
     [HideInInspector]
     public int kills = 0;
@@ -65,15 +67,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void JoinRoomButtonPressed()
     {
         Debug.Log("Connecting...");
-        int roomsWithSameName = roomList.checkRoomAgainst(roomNameToJoin);
-        Debug.Log("Rooms with same name: " + roomsWithSameName);
-        if(roomsWithSameName == 0)
+
+        if(joiningRoom)
         {
             PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
         }
         else
         {
-            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin + " (" + roomsWithSameName + ")", null, null);
+            CreateRoom();
         }
 
         nameUI.SetActive(false);
@@ -191,5 +192,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Debug.Log("Spawned " + numSpawned + " assets");
             Debug.Log("Spawned " + caseBomb + " case bombs");
             spawnAssets = false;
+    }
+
+    void CreateRoom()
+    {
+        int roomsWithSameName = roomList.checkRoomAgainst(roomNameToJoin);
+        Debug.Log("Rooms with same name: " + roomsWithSameName);
+        if(roomsWithSameName == 0)
+        {
+            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
+        }
+        else
+        {
+            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin + " (" + roomsWithSameName + ")", null, null);
+        }
     }
 }
