@@ -8,6 +8,7 @@ public class RoomItemButton : MonoBehaviour
 
     public void OnButtonPressed()
     {
+        Debug.Log("hello");
         RoomList.Instance.JoinRoomByName(RoomName);
     }
 }
