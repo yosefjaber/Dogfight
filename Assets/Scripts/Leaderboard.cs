@@ -24,6 +24,8 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI[] scoreTexts;
     public TextMeshProUGUI[] nameTexts;
     public TextMeshProUGUI[] kdTexts;
+    public GameObject[] playerHolder;
+    public GameObject Playerholder2;
 
     private void Start() 
     {
@@ -62,7 +64,8 @@ public class Leaderboard : MonoBehaviour
             }
         }
 
-        int i = 0;
+        int i = 0; //Index of position
+        int j = 0; //Index of player
         Boolean player1active = false;
         Boolean player2active = false;
 
@@ -85,8 +88,8 @@ public class Leaderboard : MonoBehaviour
                 scoreTexts[i].text = (team.Player1.GetScore() + team.Player2.GetScore()).ToString();
                 kdTexts[i].text = ((int)team.Player1.CustomProperties["kills"] + (int)team.Player2.CustomProperties["kills"]).ToString() + "/" + ((int)team.Player1.CustomProperties["deaths"] + (int)team.Player2.CustomProperties["death"]).ToString();
                 i++;
-                slots[i].SetActive(true);
-
+                
+                playerHolder[j].SetActive(true);
                 if(team.Player1.NickName == "")
                 {
                     team.Player1.NickName = "anonymous";
@@ -99,8 +102,9 @@ public class Leaderboard : MonoBehaviour
                 scoreTexts[i].text = team.Player1.GetScore().ToString();
                 kdTexts[i].text = team.Player1.CustomProperties["kills"].ToString() + "/" + team.Player1.CustomProperties["deaths"].ToString();
                 i++;
-                slots[i].SetActive(true);
-                
+                j++;
+
+                playerHolder[j].SetActive(true);
                 if(team.Player2.NickName == "")
                 {
                     team.Player2.NickName = "anonymous";
@@ -112,26 +116,32 @@ public class Leaderboard : MonoBehaviour
 
                 scoreTexts[i].text = team.Player2.GetScore().ToString();
                 kdTexts[i].text = team.Player2.CustomProperties["kills"].ToString() + "/" + team.Player2.CustomProperties["deaths"].ToString();
-                i++;
             }
             else if(player1active)
             {
+                Debug.Log("Player 1 active");
                 slots[i].SetActive(true);
                 scoreTexts[i].text = team.Player1.GetScore().ToString();
                 kdTexts[i].text = team.Player1.CustomProperties["kills"].ToString() + "/" + team.Player1.CustomProperties["deaths"].ToString();
                 i++;
-                slots[i].SetActive(true);
-                nameTexts[i].text = team.Player1.NickName;
+
+                playerHolder[j].SetActive(true);
+                if(team.Player1.NickName == "")
+                {
+                    team.Player1.NickName = "anonymous";
+                }
+                else
+                {
+                    nameTexts[i].text = team.Player1.NickName;
+                }
                 scoreTexts[i].text = team.Player1.GetScore().ToString();
                 kdTexts[i].text = team.Player1.CustomProperties["kills"].ToString() + "/" + team.Player1.CustomProperties["deaths"].ToString();
                 i++;
-                slots[i].SetActive(false);
+                j++;
+
+                playerHolder[j].SetActive(false);
             }
         }
-
-        Debug.Log("Refreshed");
-        Debug.Log(teams.Count);
-        Debug.Log(teams[0].Player1.NickName);
 
         // int i = 0; 
 

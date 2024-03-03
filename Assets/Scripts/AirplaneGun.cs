@@ -36,7 +36,6 @@ public class AirplaneGun : MonoBehaviour
 
             Destroy(bullet, 5f); // Cleanup to avoid excessive GameObjects in the scene
 
-            Debug.Log("Gun Fired");
             shootingTimer = shootingRate;
         }
     }
