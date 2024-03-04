@@ -1,28 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using System.Collections.Generic;
 
-public class Team 
+public class Team
 {
-    private Player player1;
-    private Player player2;
+    public List<Player> Players = new List<Player>();
 
-    public Team(Player player1, Player player2)
+    public bool TryAddPlayer(Player player)
     {
-        this.player1 = player1;
-        this.player2 = player2;
+        if (Players.Count < 2) // Assuming each team can have 2 players
+        {
+            Players.Add(player);
+            return true;
+        }
+        return false;
     }
 
-    public Player Player1
+    public void ClearPlayers()
     {
-        get { return player1; }
-        set { player1 = value; }
+        Players.Clear();
     }
 
-    public Player Player2
-    {
-        get { return player2; }
-        set { player2 = value; }
-    }
+    public bool HasPlayers => Players.Any();
+
+    public int TotalScore => Players.Sum(player => player.GetScore());
+    public int TotalKills => Players.Where(player => player != null && player.CustomProperties.ContainsKey("kills")).Sum(player => (int)player.CustomProperties["kills"]);
+    public int TotalDeaths => Players.Where(player => player != null && player.CustomProperties.ContainsKey("deaths")).Sum(player => (int)player.CustomProperties["deaths"]);
 }
