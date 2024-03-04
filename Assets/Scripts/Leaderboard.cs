@@ -5,12 +5,9 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using System.Collections.Generic;
-using System;
 
 public class Leaderboard : MonoBehaviour
 {
-    //Using roomManager to get the team list roomManager.teams
-    //public RoomManager roomManager;
     public GameObject playersHolder;
     public List<Team> teams = new List<Team>();
 
@@ -18,159 +15,103 @@ public class Leaderboard : MonoBehaviour
     public float refreshRate = 1f;
 
     [Header("UI")] 
-    public GameObject[] slots; //4 slots of team with 2 players each
-
-    [Space]
+    public GameObject[] slots; // 4 slots for teams
     public TextMeshProUGUI[] scoreTexts;
     public TextMeshProUGUI[] nameTexts;
     public TextMeshProUGUI[] kdTexts;
-    public GameObject[] playerHolder;
-    public GameObject Playerholder2;
+    public GameObject[] playerHolder; // Individual player UI elements
+
+    private void Awake() 
+    {
+        // Initialize teams list with empty teams
+        teams = Enumerable.Range(0, slots.Length).Select(_ => new Team()).ToList();
+    }
 
     private void Start() 
     {
         InvokeRepeating(nameof(Refresh), 1f, refreshRate);
-        for(int i = 0; i < slots.Length; i++)
-        {
-            Team team = new Team(null, null);
-            teams.Add(team);
-        }
     }
 
     public void Refresh()
     {
-        foreach(var slot in slots)
+        // Reset all UI elements to inactive
+        foreach (var slot in slots)
         {
             slot.SetActive(false);
         }
 
-        var sortedPlayerList = (from player in PhotonNetwork.PlayerList orderby player.GetScore() descending select player).ToList();
-
-        //Populate teams
-        foreach(var player in PhotonNetwork.PlayerList)
+        foreach (var player in playerHolder)
         {
-            foreach(var team in teams)
-            {
-                if(team.Player1 == null)
-                {
-                    team.Player1 = player;
-                    break;
-                }
-                else if(team.Player2 == null)
-                {
-                    team.Player2 = player;
-                    break;
-                }
-            }
+            player.SetActive(false);
         }
 
-        int i = 0; //Index of position
-        int j = 0; //Index of player
-        Boolean player1active = false;
-        Boolean player2active = false;
-
-        foreach(var team in teams)
+        // Clear existing player assignments
+        foreach (var team in teams)
         {
-            if(team.Player1 != null)
-            {
-                player1active = true;
-            }
-
-            if(team.Player2 != null)
-            {
-                player2active = true;
-            }
-
-            if(player1active && player2active)
-            {
-                //Debug.Log("Both players active");
-                slots[i].SetActive(true);
-                scoreTexts[i].text = (team.Player1.GetScore() + team.Player2.GetScore()).ToString();
-                kdTexts[i].text = ((int)team.Player1.CustomProperties["kills"] + (int)team.Player2.CustomProperties["kills"]).ToString() + "/" + ((int)team.Player1.CustomProperties["deaths"] + (int)team.Player2.CustomProperties["death"]).ToString();
-                i++;
-                
-                playerHolder[j].SetActive(true);
-                if(team.Player1.NickName == "")
-                {
-                    team.Player1.NickName = "anonymous";
-                }
-                else
-                {
-                    nameTexts[i].text = team.Player1.NickName;
-                }
-
-                scoreTexts[i].text = team.Player1.GetScore().ToString();
-                kdTexts[i].text = team.Player1.CustomProperties["kills"].ToString() + "/" + team.Player1.CustomProperties["deaths"].ToString();
-                i++;
-                j++;
-
-                playerHolder[j].SetActive(true);
-                if(team.Player2.NickName == "")
-                {
-                    team.Player2.NickName = "anonymous";
-                }
-                else
-                {
-                    nameTexts[i].text = team.Player2.NickName;
-                }
-
-                scoreTexts[i].text = team.Player2.GetScore().ToString();
-                kdTexts[i].text = team.Player2.CustomProperties["kills"].ToString() + "/" + team.Player2.CustomProperties["deaths"].ToString();
-            }
-            else if(player1active)
-            {
-                Debug.Log("Player 1 active");
-                slots[i].SetActive(true);
-                scoreTexts[i].text = team.Player1.GetScore().ToString();
-                kdTexts[i].text = team.Player1.CustomProperties["kills"].ToString() + "/" + team.Player1.CustomProperties["deaths"].ToString();
-                i++;
-
-                playerHolder[j].SetActive(true);
-                if(team.Player1.NickName == "")
-                {
-                    team.Player1.NickName = "anonymous";
-                }
-                else
-                {
-                    nameTexts[i].text = team.Player1.NickName;
-                }
-                scoreTexts[i].text = team.Player1.GetScore().ToString();
-                kdTexts[i].text = team.Player1.CustomProperties["kills"].ToString() + "/" + team.Player1.CustomProperties["deaths"].ToString();
-                i++;
-                j++;
-
-                playerHolder[j].SetActive(false);
-            }
+            team.ClearPlayers();
         }
 
-        // int i = 0; 
+        // Assign players to teams based on current player list
+        AssignPlayersToTeams();
 
-        // foreach(var player in sortedPlayerList)
-        // {
-        //     slots[i].SetActive(true);
-
-        //     if(player.NickName == "")
-        //     {
-        //         player.NickName = "anonymous";
-        //     }
-
-        //     nameTexts[i].text = player.NickName;
-        //     scoreTexts[i].text = player.GetScore().ToString();
-
-        //     if(player.CustomProperties["kills"] != null)
-        //     {
-        //         kdTexts[i].text = player.CustomProperties["kills"].ToString() + "/" + player.CustomProperties["deaths"].ToString();
-        //     }
-        //     else
-        //     {
-        //         kdTexts[i].text = "0/0";
-        //     }
-
-        //     i++;
-        // }
+        // Update UI
+        UpdateUI();
     }
 
-    private void Update() {
+    private void AssignPlayersToTeams()
+    {
+        var players = PhotonNetwork.PlayerList;
+
+        foreach (var player in players)
+        {
+            // Try to add player to an existing team
+            bool addedToTeam = false;
+            foreach (var team in teams)
+            {
+                if (team.TryAddPlayer(player))
+                {
+                    addedToTeam = true;
+                    break;
+                }
+            }
+
+            if (!addedToTeam)
+            {
+                Debug.LogWarning("Failed to add player to any team. Consider increasing the number of teams.");
+            }
+        }
+    }
+
+    private void UpdateUI()
+    {
+        int slotIndex = 0;
+        int playerIndex = 0;
+        int index = 0;
+
+        foreach (var team in teams.Where(t => t.HasPlayers))
+        {
+            // Update team slot UI
+            slots[slotIndex].SetActive(true);
+            scoreTexts[index].text = team.TotalScore.ToString();
+            kdTexts[index].text = $"{team.TotalKills}/{team.TotalDeaths}";
+            slotIndex++;
+            index++;
+
+            // Update individual player UI
+            foreach (var player in team.Players)
+            {
+                playerHolder[playerIndex].SetActive(true);
+                nameTexts[index].text = string.IsNullOrEmpty(player.NickName) ? "anonymous" : player.NickName;
+                scoreTexts[index].text = player.GetScore().ToString();
+                kdTexts[playerIndex].text = $"{player.CustomProperties["kills"] ?? "0"}/{player.CustomProperties["deaths"] ?? "0"}";
+                playerIndex++;
+                index++;
+            }
+        }
+    }
+
+    private void Update()
+    {
         playersHolder.SetActive(Input.GetKey(KeyCode.Tab));
     }
 }
