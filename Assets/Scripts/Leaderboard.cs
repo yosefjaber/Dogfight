@@ -87,10 +87,19 @@ public class Leaderboard : MonoBehaviour
         int slotIndex = 0;
         int playerIndex = 0;
         int index = 0;
+        Team highestScoreTeam = teams.OrderByDescending(t => t.TotalScore).FirstOrDefault();
 
         foreach (var team in teams.Where(t => t.HasPlayers))
         {
             // Update team slot UI
+            if (team == highestScoreTeam && highestScoreTeam.TotalScore > 0 && nameTexts[slotIndex].text.Substring(nameTexts[slotIndex].text.Length - 3) != "!!!")
+            {
+                nameTexts[slotIndex].text = nameTexts[slotIndex].text + "!!!";
+            }
+            else if (team != highestScoreTeam && nameTexts[slotIndex].text.Substring(nameTexts[slotIndex].text.Length - 3) == "!!!")
+            {
+                nameTexts[slotIndex].text = nameTexts[slotIndex].text.Substring(0, nameTexts[slotIndex].text.Length - 3);
+            }
             slots[slotIndex].SetActive(true);
             scoreTexts[index].text = team.TotalScore.ToString();
             kdTexts[index].text = $"{team.TotalKills}/{team.TotalDeaths}";
