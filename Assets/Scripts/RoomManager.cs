@@ -8,7 +8,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager instance;
     public RoomList roomList;
-    //private static bool spawnedAssets = false;
 
     public GameObject player;
     [Space]
@@ -33,6 +32,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public int kills = 0;
     [HideInInspector]
     public int deaths = 0;
+    [HideInInspector]
+    public bool isAddedToTeam = false;
 
     [Header("Plane")]
     public GameObject plane;
@@ -64,17 +65,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
         nickname = name;
     }
 
-    public void JoinRoomButtonPressed()
+    public void JoinRoomButtonPressed(bool joiningRoom)
     {
         Debug.Log("Connecting...");
 
         if(joiningRoom)
         {
             PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
+            Debug.Log("Joining room");
         }
         else
         {
             CreateRoom();
+            Debug.Log("Creating room");
         }
 
         nameUI.SetActive(false);
@@ -158,8 +161,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     float xPos = -875 + (1 / detailScale) * 1750 * x;
                     float zPos = 875 - (1 / detailScale) * 1750 * y;
                     float randomRotation = Random.Range(0f, 360f);
-                        // Spawn assets using the client's PhotonNetwork.Instantiate method
-                        //PhotonNetwork.Instantiate(assets[Random.Range(3, assets.Length)].name, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
                         assetIndex = Random.Range(0, assets.Length);
                         GameObject assetPrefab = assets[assetIndex]; // Assuming assets[] is an array of GameObjects (prefabs)
 

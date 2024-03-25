@@ -9,6 +9,8 @@ public class CreateButtonLogic : MonoBehaviour
 
     void OnButtonClick()
     {
+        Debug.Log("joiningRoom false");
         roomManager.joiningRoom = false;
+        Debug.Log("joiningRoom false");
     }
 }
