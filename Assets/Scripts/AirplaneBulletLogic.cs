@@ -20,7 +20,10 @@ public class AirplaneBulletLogic : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        PhotonNetwork.Instantiate(bulletExplosion.name, transform.position, Quaternion.identity);
-        PhotonNetwork.Destroy(gameObject);
+        if(GetComponent<PhotonView>().IsMine)
+        {
+            PhotonNetwork.Instantiate(bulletExplosion.name, transform.position, Quaternion.identity);
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }
