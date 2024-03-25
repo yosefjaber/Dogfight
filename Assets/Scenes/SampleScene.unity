@@ -1119,6 +1119,7 @@ MonoBehaviour:
   joiningRoom: 1
   kills: 0
   deaths: 0
+  isAddedToTeam: 0
   plane: {fileID: 1064898015671995858, guid: 3a1946f160ed28f469df5329740b09e4, type: 3}
   test: {fileID: 5962549037230125428, guid: 22f04018200daa6418994b7b4efc7abe, type: 3}
   assets:
@@ -9301,43 +9302,46 @@ MonoBehaviour:
   - {fileID: 369341262}
   - {fileID: 582555005}
   - {fileID: 2045062064}
-  scoreTexts:
+  teamScoreTexts:
   - {fileID: 1233255769}
+  - {fileID: 2038709450}
+  - {fileID: 1883133543}
+  - {fileID: 708888091}
+  playerScoreTexts:
   - {fileID: 1679559726}
   - {fileID: 598376437}
-  - {fileID: 2038709450}
   - {fileID: 1810948944}
   - {fileID: 1653933603}
-  - {fileID: 1883133543}
   - {fileID: 1764146497}
   - {fileID: 1216330676}
-  - {fileID: 708888091}
   - {fileID: 566043478}
   - {fileID: 2090797031}
-  nameTexts:
+  teamNameTexts:
   - {fileID: 1470180064}
+  - {fileID: 2080159819}
+  - {fileID: 1517854266}
+  - {fileID: 137807822}
+  playerNameTexts:
   - {fileID: 215329807}
   - {fileID: 1258205909}
-  - {fileID: 2080159819}
   - {fileID: 24142162}
   - {fileID: 2080562455}
-  - {fileID: 1517854266}
   - {fileID: 1472178802}
   - {fileID: 1992887768}
-  - {fileID: 137807822}
   - {fileID: 865220815}
   - {fileID: 1554633374}
-  kdTexts:
+  teamKdTexts:
   - {fileID: 289137094}
+  - {fileID: 352475063}
+  - {fileID: 749590924}
+  - {fileID: 1655697053}
+  playerKdTexts:
   - {fileID: 1600812349}
   - {fileID: 1114040583}
-  - {fileID: 352475063}
   - {fileID: 564022612}
   - {fileID: 1620764971}
-  - {fileID: 749590924}
   - {fileID: 1555119922}
   - {fileID: 1680070947}
-  - {fileID: 1655697053}
   - {fileID: 622442559}
   - {fileID: 141381946}
   playerHolder:

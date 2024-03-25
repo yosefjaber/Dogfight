@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using System.Collections.Generic;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Team
 {
@@ -11,13 +12,15 @@ public class Team
 
     public bool TryAddPlayer(Player player)
     {
-        if (Players.Count < 2) // Assuming each team can have 2 players
+        if (Players.Count < 2)
         {
             Players.Add(player);
             return true;
         }
         return false;
     }
+
+
 
     public void ClearPlayers()
     {

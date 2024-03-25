@@ -16,9 +16,12 @@ public class Leaderboard : MonoBehaviour
 
     [Header("UI")] 
     public GameObject[] slots; // 4 slots for teams
-    public TextMeshProUGUI[] scoreTexts;
-    public TextMeshProUGUI[] nameTexts;
-    public TextMeshProUGUI[] kdTexts;
+    public TextMeshProUGUI[] teamScoreTexts;
+    public TextMeshProUGUI[] playerScoreTexts;
+    public TextMeshProUGUI[] teamNameTexts;
+    public TextMeshProUGUI[] playerNameTexts;
+    public TextMeshProUGUI[] teamKdTexts;
+    public TextMeshProUGUI[] playerKdTexts;
     public GameObject[] playerHolder; // Individual player UI elements
 
     private void Awake() 
@@ -61,60 +64,64 @@ public class Leaderboard : MonoBehaviour
     private void AssignPlayersToTeams()
     {
         var players = PhotonNetwork.PlayerList;
-
+        
         foreach (var player in players)
         {
-            // Try to add player to an existing team
-            bool addedToTeam = false;
+            bool playerAlreadyAssigned = false;
             foreach (var team in teams)
             {
-                if (team.TryAddPlayer(player))
+                if (team.Players.Contains(player))
                 {
-                    addedToTeam = true;
+                    playerAlreadyAssigned = true;
                     break;
                 }
             }
 
-            if (!addedToTeam)
+            if (!playerAlreadyAssigned)
             {
-                Debug.LogWarning("Failed to add player to any team. Consider increasing the number of teams.");
+                foreach (var team in teams)
+                {
+                    if (team.TryAddPlayer(player))
+                    {
+                        break;
+                    }
+                }
             }
         }
     }
 
     private void UpdateUI()
     {
-        int slotIndex = 0;
         int playerIndex = 0;
-        int index = 0;
+        int teamIndex = 0;
+
         Team highestScoreTeam = teams.OrderByDescending(t => t.TotalScore).FirstOrDefault();
 
         foreach (var team in teams.Where(t => t.HasPlayers))
         {
             // Update team slot UI
-            if (team == highestScoreTeam && highestScoreTeam.TotalScore > 0 && nameTexts[slotIndex].text.Substring(nameTexts[slotIndex].text.Length - 3) != "!!!")
+            if (team == highestScoreTeam && highestScoreTeam.TotalScore > 0 && teamNameTexts[teamIndex].text.Substring(teamNameTexts[teamIndex].text.Length - 3) != "!!!")
             {
-                nameTexts[slotIndex].text = nameTexts[slotIndex].text + "!!!";
+                teamNameTexts[teamIndex].text = teamNameTexts[teamIndex].text + "!!!";
+                Debug.Log("Highest score team: " + teamNameTexts[teamIndex].text);
             }
-            else if (team != highestScoreTeam && nameTexts[slotIndex].text.Substring(nameTexts[slotIndex].text.Length - 3) == "!!!")
+            else if (team != highestScoreTeam && teamNameTexts[teamIndex].text.Substring(teamNameTexts[teamIndex].text.Length - 3) == "!!!")
             {
-                nameTexts[slotIndex].text = nameTexts[slotIndex].text.Substring(0, nameTexts[slotIndex].text.Length - 3);
+                teamNameTexts[teamIndex].text = teamNameTexts[teamIndex].text.Substring(0, teamNameTexts[teamIndex].text.Length - 3);
             }
-            slots[slotIndex].SetActive(true);
-            scoreTexts[index].text = team.TotalScore.ToString();
-            kdTexts[index].text = $"{team.TotalKills}/{team.TotalDeaths}";
-            slotIndex++;
-            index++;
+            slots[teamIndex].SetActive(true);
+            teamScoreTexts[teamIndex].text = team.TotalScore.ToString();
+            teamKdTexts[teamIndex].text = $"{team.TotalKills}/{team.TotalDeaths}";
+            teamIndex++;
 
             // Update individual player UI
             foreach (var player in team.Players)
             {
                 playerHolder[playerIndex].SetActive(true);
-                nameTexts[index].text = string.IsNullOrEmpty(player.NickName) ? "anonymous" : player.NickName;
-                scoreTexts[index].text = player.GetScore().ToString();
-                kdTexts[playerIndex].text = $"{player.CustomProperties["kills"] ?? "0"}/{player.CustomProperties["deaths"] ?? "0"}";
+                playerNameTexts[playerIndex].text = string.IsNullOrEmpty(player.NickName) ? "anonymous" : player.NickName;
+                playerScoreTexts[playerIndex].text = player.GetScore().ToString();
+                playerKdTexts[playerIndex].text = $"{player.CustomProperties["kills"] ?? "0"}/{player.CustomProperties["deaths"] ?? "0"}";
                 playerIndex++;
-                index++;
             }
         }
     }
