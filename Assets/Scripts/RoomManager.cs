@@ -65,19 +65,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
         nickname = name;
     }
 
-    public void JoinRoomButtonPressed(bool joiningRoom)
+    public void JoinRoomButtonPressed()
     {
         Debug.Log("Connecting...");
 
         if(joiningRoom)
         {
-            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
             Debug.Log("Joining room");
+            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
         }
         else
         {
-            CreateRoom();
             Debug.Log("Creating room");
+            CreateRoom();
         }
 
         nameUI.SetActive(false);
