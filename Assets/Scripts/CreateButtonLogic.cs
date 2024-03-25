@@ -7,10 +7,9 @@ public class CreateButtonLogic : MonoBehaviour
     // Start is called before the first frame update
     public RoomManager roomManager;
 
-    void OnButtonClick()
+    public void CreatingRoom()
     {
-        Debug.Log("joiningRoom false");
+        Debug.Log("Button Presssed");
         roomManager.joiningRoom = false;
-        Debug.Log("joiningRoom false");
     }
 }
