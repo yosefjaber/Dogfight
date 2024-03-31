@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI[] teamKdTexts;
     public TextMeshProUGUI[] playerKdTexts;
     public GameObject[] playerHolder; // Individual player UI elements
+    private int index;
 
     private void Awake() 
     {
@@ -48,22 +50,17 @@ public class Leaderboard : MonoBehaviour
             player.SetActive(false);
         }
 
-        // Clear existing player assignments
-        foreach (var team in teams)
-        {
-            team.ClearPlayers();
-        }
-
-        // Assign players to teams based on current player list
-        AssignPlayersToTeams();
-
-        // Update UI
+        teams = AssignPlayersToTeams();
+        // printTeams();
         UpdateUI();
     }
 
-    private void AssignPlayersToTeams()
+    private List<Team> AssignPlayersToTeams()
     {
         var players = PhotonNetwork.PlayerList;
+
+        List<Team> newTeams = new List<Team>();
+        newTeams = Enumerable.Range(0, slots.Length).Select(_ => new Team()).ToList();
         
         foreach (var player in players)
         {
@@ -73,13 +70,18 @@ public class Leaderboard : MonoBehaviour
                 if (team.Players.Contains(player))
                 {
                     playerAlreadyAssigned = true;
+                    index = teams.IndexOf(team);
                     break;
                 }
             }
 
-            if (!playerAlreadyAssigned)
+            if (playerAlreadyAssigned)
             {
-                foreach (var team in teams)
+                newTeams[index].Players.Add(player);
+            }
+            else
+            {
+                foreach (var team in newTeams)
                 {
                     if (team.TryAddPlayer(player))
                     {
@@ -88,6 +90,8 @@ public class Leaderboard : MonoBehaviour
                 }
             }
         }
+
+        return newTeams;
     }
 
     private void UpdateUI()
@@ -122,6 +126,27 @@ public class Leaderboard : MonoBehaviour
                 playerScoreTexts[playerIndex].text = player.GetScore().ToString();
                 playerKdTexts[playerIndex].text = $"{player.CustomProperties["kills"] ?? "0"}/{player.CustomProperties["deaths"] ?? "0"}";
                 playerIndex++;
+            }
+
+            if (team.Players.Count < 2)
+            {
+                playerHolder[playerIndex].SetActive(true);
+                playerNameTexts[playerIndex].text = "Waiting for player...";
+                playerScoreTexts[playerIndex].text = "0";
+                playerKdTexts[playerIndex].text = "0/0";
+                playerIndex++;
+            }
+        }
+    }
+
+    private void printTeams()
+    {
+        foreach (var team in teams)
+        {
+            Debug.Log("Team: " + team.Players.Count);
+            foreach (var player in team.Players)
+            {
+                Debug.Log("Player: " + player.NickName);
             }
         }
     }
