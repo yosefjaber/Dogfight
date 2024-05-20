@@ -1219,6 +1219,7 @@ GameObject:
   - component: {fileID: 5558751978498051333}
   - component: {fileID: 2817649351328905217}
   - component: {fileID: 6526635266351981716}
+  - component: {fileID: 5448062478475420188}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1493,6 +1494,22 @@ MonoBehaviour:
   Exitbutton:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &5448062478475420188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997724663405909963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f14df1e4cf4674a684205d6a1602e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  red: {fileID: 2100000, guid: b42697ff222436b3a879061fad4e9ce3, type: 2}
+  green: {fileID: 2100000, guid: 37ed242933d6b013fb535bf694ee39f2, type: 2}
+  blue: {fileID: 2100000, guid: 2ee6b5745db5544b5a81832247ebdcfb, type: 2}
+  yellow: {fileID: 2100000, guid: 320e4092f5f680f5cb6261e5194113ee, type: 2}
 --- !u!1001 &2611190880856640008
 PrefabInstance:
   m_ObjectHideFlags: 0
