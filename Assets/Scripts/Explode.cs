@@ -12,6 +12,8 @@ public class Explode : MonoBehaviour
     public GameObject leftGear;
     public GameObject rightGear;
     public GameObject planeBody;
+    public int damage = 100;
+    public float radius = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +27,13 @@ public class Explode : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject != plane && other.gameObject != leftGear && other.gameObject != rightGear && other.gameObject != planeBody)
         {
             PhotonNetwork.Instantiate(explosion.name, transform.position, Quaternion.identity);
             // Optionally, destroy the bomb game object to simulate the explosion effect
+            DamageUtility.CalculateExplosionDamage(transform.position, radius, damage);
             PhotonNetwork.Destroy(gameObject);
         }
     }

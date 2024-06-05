@@ -8,16 +8,33 @@ public class Health : MonoBehaviour
 {
     public int health;
     public bool IsLocalPlayer;
+    public bool testPlayer;
+    public Material hurtColor;
+    private Material originalColor;
 
     [Header("UI")]
     public TextMeshProUGUI healthText;
+
+    private void Start()
+    {
+        originalColor = GetComponent<Renderer>().material;
+    }
 
     [PunRPC]
     public void TakeDamage(int damage)
     {
         health -= damage;
-
-        healthText.text = health.ToString();
+        
+        if(testPlayer)
+        {
+            Debug.Log("Health: " + health);
+            GetComponent<Renderer>().material = hurtColor;
+            Invoke("ResetColor", 0.3f);
+        }
+        else
+        {
+            healthText.text = health.ToString();
+        }
 
         if (health <= 0)
         {
@@ -27,8 +44,16 @@ public class Health : MonoBehaviour
                 RoomManager.instance.deaths++;
                 RoomManager.instance.SetHashes();
             }
-
-            Destroy(gameObject);
+            
+            if(!testPlayer)
+            {
+                Destroy(gameObject);
+            }
         }
+    }
+
+    private void ResetColor()
+    {
+        GetComponent<Renderer>().material = originalColor;
     }
 }
