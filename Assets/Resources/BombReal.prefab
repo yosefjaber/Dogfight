@@ -192,3 +192,6 @@ MonoBehaviour:
   leftGear: {fileID: 0}
   rightGear: {fileID: 0}
   planeBody: {fileID: 0}
+  sphere: {fileID: 6126831294692087376, guid: 6bc22241afa6bd30487ed92c88da7d50, type: 3}
+  damage: 100
+  radius: 100
