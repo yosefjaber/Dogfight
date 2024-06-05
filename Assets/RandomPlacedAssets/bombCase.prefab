@@ -118,10 +118,10 @@ GameObject:
   - component: {fileID: 8120592730312691437}
   - component: {fileID: 2474479532780768266}
   - component: {fileID: 7635811813842686717}
-  - component: {fileID: 5460283526578609701}
   - component: {fileID: 6799122146627391887}
   - component: {fileID: 8824208841778105854}
   - component: {fileID: 6392736370392217220}
+  - component: {fileID: 4715891299284302933}
   m_Layer: 0
   m_Name: CaseBomb
   m_TagString: Untagged
@@ -221,20 +221,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5460283526578609701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5588650351997772736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01639b1f10e98c3d9d8d265bc2c1f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Case: {fileID: 4405649961020431350}
-  explosion: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
 --- !u!114 &6799122146627391887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,4 +284,23 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.010260341, y: 0.010260342, z: 0.04535967}
-  m_Center: {x: 0.00001334399, y: 0.000020845333, z: 0.022679836}
+  m_Center: {x: 0.00001334399, y: 0, z: 0.022679836}
+--- !u!114 &4715891299284302933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5588650351997772736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2850979f94d16147b9018a448a681a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
+  plane: {fileID: 0}
+  leftGear: {fileID: 0}
+  rightGear: {fileID: 0}
+  planeBody: {fileID: 0}
+  damage: 100
+  radius: 100
