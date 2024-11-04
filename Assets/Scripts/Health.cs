@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using Photon.Pun.UtilityScripts;
 
 public class Health : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class Health : MonoBehaviour
                 RoomManager.instance.SpawnPlayer();
                 RoomManager.instance.deaths++;
                 RoomManager.instance.SetHashes();
+                PhotonNetwork.LocalPlayer.AddScore(-100);
             }
             
             if(!testPlayer)

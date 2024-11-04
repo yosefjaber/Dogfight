@@ -14,6 +14,12 @@ public class Explode : MonoBehaviour
     public GameObject planeBody;
     public int damage = 100;
     public float radius = 100f;
+    private PhotonView photonView;
+    
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,11 +30,25 @@ public class Explode : MonoBehaviour
             PhotonNetwork.Destroy(gameObject);
         }
     }
-
+    
     public void Explosion()
     {
         PhotonNetwork.Instantiate(explosion.name, transform.position, Quaternion.identity);
         DamageUtility.CalculateExplosionDamage(transform.position, radius, damage);
-        PhotonNetwork.Destroy(gameObject);
+        
+        if(PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+        else
+        {
+            photonView.RPC("DestroyObject", RpcTarget.MasterClient, photonView.ViewID);
+        }
+    }
+    
+    [PunRPC]
+    public void DestroyObject(int viewID)
+    {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
     }
 }

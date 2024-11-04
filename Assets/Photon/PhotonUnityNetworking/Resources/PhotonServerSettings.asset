@@ -44,6 +44,9 @@ MonoBehaviour:
   - SetNickname
   - GenerateAssets
   - SyncColor
+  - Explosion
+  - DestroyObject
+  - MasterDestroy
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

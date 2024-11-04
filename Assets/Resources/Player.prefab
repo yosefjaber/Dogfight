@@ -1471,6 +1471,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   IsLocalPlayer: 0
+  testPlayer: 0
+  hurtColor: {fileID: 0}
   healthText: {fileID: 854786385940487706}
 --- !u!114 &6526635266351981716
 MonoBehaviour:
