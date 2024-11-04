@@ -18,15 +18,12 @@ public class Weapon : MonoBehaviour
     public GameObject hitVFX;
 
     [Header("Ammo")]
-    //how many mags you have
-    public int mag = 5;
     //How much ammo you start with
     public int ammo = 30; 
     //How many ammo in each mag
     public int magAmmo = 30;
 
     [Header("UI")]
-    public TextMeshProUGUI magText;
     public TextMeshProUGUI ammoText;
     private float nextFire;
 
@@ -55,7 +52,6 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-        magText.text = mag.ToString();
         ammoText.text = ammo.ToString() + "/" + magAmmo.ToString();
 
         originalPosition = transform.localPosition;
@@ -82,7 +78,7 @@ public class Weapon : MonoBehaviour
             Fire();
         }
 
-        if(Input.GetKeyDown(KeyCode.R) && mag > 0 && ammo < magAmmo && !animation.isPlaying)
+        if(Input.GetKeyDown(KeyCode.R) && ammo < magAmmo && !animation.isPlaying)
         {
             Reload();
         }
@@ -101,13 +97,8 @@ public class Weapon : MonoBehaviour
     void Reload()
     {
         animation.Play(reload.name);
-        if(mag > 0)
-        {
-            mag--;
-            ammo = magAmmo;
-        }
+        ammo = magAmmo;
 
-        magText.text = mag.ToString();
         ammoText.text = ammo.ToString() + "/" + magAmmo.ToString();
     }
 
