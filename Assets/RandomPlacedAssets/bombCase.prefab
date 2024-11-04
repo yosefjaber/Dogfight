@@ -237,7 +237,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
@@ -302,5 +302,5 @@ MonoBehaviour:
   leftGear: {fileID: 0}
   rightGear: {fileID: 0}
   planeBody: {fileID: 0}
-  damage: 100
+  damage: 10
   radius: 100

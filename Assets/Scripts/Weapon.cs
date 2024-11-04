@@ -123,7 +123,7 @@ public class Weapon : MonoBehaviour
         //Invert the bitmask to ignore the specified layer
         PlayerMask = ~PlayerMask;
 
-        if(Physics.Raycast(ray.origin, ray.direction, out hit, 100f, PlayerMask))
+        if(Physics.Raycast(ray.origin, ray.direction, out hit, 1000f, PlayerMask))
         {
             PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
 
@@ -142,9 +142,7 @@ public class Weapon : MonoBehaviour
 
             if(hit.transform.gameObject.GetComponent<Explode>())
             {
-                Explode explode = hit.transform.gameObject.GetComponent<Explode>();
-
-                explode.Explosion();
+                hit.transform.gameObject.GetComponent<Explode>().Explosion();
             }
         }
     }

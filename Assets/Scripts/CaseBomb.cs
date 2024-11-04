@@ -30,8 +30,7 @@ public class CaseBomb : MonoBehaviour
     public void explode()
     {
         PhotonNetwork.Instantiate(explosion.name, transform.position, Quaternion.identity);
-        // Optionally, destroy the bomb game object to simulate the explosion effect
-        //Destroy(this.gameObject, 0.1f);
-        Destroy(this.gameObject);
+        PhotonNetwork.Destroy(this.gameObject);
+        Debug.Log("Bomb Exploded");
     }
 }
