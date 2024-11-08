@@ -2,30 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class PlaneLogic : MonoBehaviour
 {
+    //Plane Variables
     public GameObject planeCamera;
     public GameObject backCamera;
     public Transform playerPoint;
     private Rigidbody rb;
     private RoomManager roomManager;
     private BombLogic bombLogic;
-    public AirplaneGun leftAirplaneGun;
-    public AirplaneGun rightAirplaneGun; 
     
-
+    //Mouse Flight
     public GameObject MouseFlightRig;
     public GameObject MouseFlightHud;
     public GameObject plane;
-    // public Animation animation;
-    // public AnimationClip propeller;
+    
+    //Gun Variables
+    public AirplaneGun leftAirplaneGun;
+    public AirplaneGun rightAirplaneGun; 
+    public TextMeshProUGUI planeAmmoText;
+    private int maxAmmo;
 
     private void Start() 
     {
+        maxAmmo = leftAirplaneGun.maxAmmo + rightAirplaneGun.maxAmmo;
         roomManager = GameObject.Find("RoomManager").GetComponent<RoomManager>();
         bombLogic = GameObject.Find("BombShoot").GetComponent<BombLogic>();
         rb = GetComponent<Rigidbody>(); 
+        planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
     }
 
     private void Update() 
@@ -56,10 +62,19 @@ public class PlaneLogic : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo) > 0)
         {
+            //Timer in shoot so no need to worry about rate of fire
             leftAirplaneGun.Shoot();
             rightAirplaneGun.Shoot();
+            planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
+        }
+        
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            leftAirplaneGun.currentAmmo = maxAmmo/2 ;
+            rightAirplaneGun.currentAmmo = maxAmmo/2;
+            planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
         }
     }
 

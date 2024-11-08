@@ -1870,10 +1870,8 @@ MonoBehaviour:
   fireRate: 10
   camera: {fileID: 8997724662192631078}
   hitVFX: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
-  mag: 5
   ammo: 30
   magAmmo: 30
-  magText: {fileID: 0}
   ammoText: {fileID: 1480280953721504072}
   animation: {fileID: 1140188231}
   reload: {fileID: 7400000, guid: 20a326a7fc5d0db49829144e6ea96393, type: 2}
