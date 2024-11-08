@@ -10,6 +10,8 @@ public class AirplaneGun : MonoBehaviour
     public float bulletSpeed = 1000f;
     public float shootingRate = 0.5f;
     private float shootingTimer = 0.5f;
+    public int maxAmmo = 40;
+    public int currentAmmo = 40;
 
     void Start()
     {
@@ -37,6 +39,7 @@ public class AirplaneGun : MonoBehaviour
             Destroy(bullet, 5f); // Cleanup to avoid excessive GameObjects in the scene
 
             shootingTimer = shootingRate;
+            currentAmmo--;
         }
     }
 }
