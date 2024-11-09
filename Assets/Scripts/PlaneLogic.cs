@@ -18,8 +18,9 @@ public class PlaneLogic : MonoBehaviour
     public GameObject MouseFlightRig;
     public GameObject MouseFlightHud;
     public GameObject plane;
-    
+
     //Gun Variables
+    public BulletsLeftText bulletsLeftText;
     public AirplaneGun leftAirplaneGun;
     public AirplaneGun rightAirplaneGun; 
     public TextMeshProUGUI planeAmmoText;
@@ -68,6 +69,7 @@ public class PlaneLogic : MonoBehaviour
             leftAirplaneGun.Shoot();
             rightAirplaneGun.Shoot();
             planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
+            bulletsLeftText.UpdateBulletsLeft(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
         }
         
         if(Input.GetKeyDown(KeyCode.R))
