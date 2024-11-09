@@ -903,7 +903,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1087
+    m_Bits: 5183
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1361,6 +1361,9 @@ MonoBehaviour:
   Exitbutton:
     serializedVersion: 2
     m_Bits: 1024
+  ReloadButton:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &5448062478475420188
 MonoBehaviour:
   m_ObjectHideFlags: 0
