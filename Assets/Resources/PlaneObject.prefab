@@ -532,7 +532,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1472,6 +1472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d57e85b2c17c808831ce339c26f4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planeLogic: {fileID: 0}
 --- !u!1 &1123321881998273943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,6 +1848,7 @@ RectTransform:
   - {fileID: 7351091538638190179}
   - {fileID: 6741421328547747870}
   - {fileID: 2577494243877989939}
+  - {fileID: 5028970231391380466}
   m_Father: {fileID: 1064898015671995859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3646,6 +3648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d57e85b2c17c808831ce339c26f4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planeLogic: {fileID: 5969768830683822901}
 --- !u!1 &5163997174080873593
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,6 +3859,57 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5238397174053348486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5028970231391380466}
+  - component: {fileID: 8315985670372237458}
+  m_Layer: 0
+  m_Name: PlaneGunManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5028970231391380466
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5238397174053348486}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9208348980535904304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8315985670372237458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5238397174053348486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50a4357ad9f01e1981dbb5d136e8dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RightGun: {fileID: 0}
+  LeftGun: {fileID: 0}
+  BombShoot: {fileID: 0}
 --- !u!1 &5366707173187923549
 GameObject:
   m_ObjectHideFlags: 0

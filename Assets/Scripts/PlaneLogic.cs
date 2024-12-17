@@ -72,17 +72,24 @@ public class PlaneLogic : MonoBehaviour
             bulletsLeftText.UpdateBulletsLeft(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
         }
         
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            leftAirplaneGun.currentAmmo = maxAmmo/2 ;
-            rightAirplaneGun.currentAmmo = maxAmmo/2;
-            planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
-        }
+        // if(Input.GetKeyDown(KeyCode.R))
+        // {
+        //     leftAirplaneGun.currentAmmo = maxAmmo/2 ;
+        //     rightAirplaneGun.currentAmmo = maxAmmo/2;
+        //     planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
+        // }
     }
 
     private void FixedUpdate() 
     {
 
+    }
+    
+    public void ReloadPlane()
+    {
+        leftAirplaneGun.currentAmmo = maxAmmo/2 ;
+        rightAirplaneGun.currentAmmo = maxAmmo/2;
+        planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
     }
 
     public void ExitPilot()
