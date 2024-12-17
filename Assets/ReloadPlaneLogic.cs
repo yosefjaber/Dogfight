@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class ReloadPlaneLogic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public PlaneLogic planeLogic;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
-    public void ReloadPlane(GameObject player)
+    public void ReloadPlane()
     {
-        Debug.Log("Reloading Plane");
+        planeLogic.ReloadPlane();
     }
 }

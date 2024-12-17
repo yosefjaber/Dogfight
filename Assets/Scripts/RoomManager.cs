@@ -6,69 +6,49 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
+    #region Fields
     public static RoomManager instance;
     public RoomList roomList;
 
+    [Header("Player")]
     public GameObject player;
-    [Space]
     public Transform[] spawnPoints;
     public Transform[] spawnPlanePoints;
 
-    [Space]
+    [Header("UI")]
     public GameObject roomCam;
-
-    [Space]
     public GameObject nameUI;
     public GameObject connectingUI;
 
+    [Header("Player Stats")]
     private string nickname = "anonymous";
     public string roomNameToJoin = "test";
     public bool ClientRender = false;
-
     public bool joiningRoom = true;
+    [HideInInspector] public int kills = 0;
+    [HideInInspector] public int deaths = 0;
+    [HideInInspector] public bool isAddedToTeam = false;
 
-
-    [HideInInspector]
-    public int kills = 0;
-    [HideInInspector]
-    public int deaths = 0;
-    [HideInInspector]
-    public bool isAddedToTeam = false;
-
-    [Header("Plane")]
+    [Header("Plane")] 
     public GameObject plane;
 
-
-
-
-    [Header("Map Generator")]
+    [Header("Map Generation")]
     public GameObject test;
     public GameObject[] assets;
-
-    [Header("Random Set Assets")]
     public float detailScale = 20f;
-    [Range(0f, 1f)]
-    public float chanceOfSpawn = 0.5f;
-    [Range(0f, 1f)]
-    public float chanceofBombSpawn = 0.1f;
+    [Range(0f, 1f)] public float chanceOfSpawn = 0.5f;
+    [Range(0f, 1f)] public float chanceofBombSpawn = 0.1f;
     public float offSet = 5f;
     public bool spawnAssets = true;
+    #endregion
 
+    private void Awake() => instance = this;
 
-    void Awake()
-    {
-        instance = this;
-    }
-
-    public void ChangeNickname(string name)
-    {
-        nickname = name;
-    }
+    public void ChangeNickname(string name) => nickname = name;
 
     public void JoinRoomButtonPressed()
     {
         Debug.Log("Connecting...");
-
         if(joiningRoom)
         {
             Debug.Log("Joining room");
@@ -87,9 +67,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-
         Debug.Log("We're connected and in a room");
-
         roomCam.SetActive(false);
 
         SpawnPlayer();
@@ -97,31 +75,31 @@ public class RoomManager : MonoBehaviourPunCallbacks
         GenerateAssets();
     }
 
+    private void SetupPlayer(GameObject playerInstance)
+    {
+        playerInstance.GetComponent<PlayerSetup>().IsLocalPlayer();
+        playerInstance.GetComponent<Health>().IsLocalPlayer = true;
+        playerInstance.GetComponent<PhotonView>().RPC("SetNickname", RpcTarget.AllBuffered, nickname);
+        PhotonNetwork.LocalPlayer.NickName = nickname;
+    }
+
     public void SpawnPlayer()
     {
         Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-
-        GameObject player = PhotonNetwork.Instantiate(this.player.name, spawnPoint.position, Quaternion.identity);
-        player.GetComponent<PlayerSetup>().IsLocalPlayer();
-        player.GetComponent<Health>().IsLocalPlayer = true;
-        player.GetComponent<PhotonView>().RPC("SetNickname", RpcTarget.AllBuffered, nickname);
-        PhotonNetwork.LocalPlayer.NickName = nickname;
+        GameObject playerInstance = PhotonNetwork.Instantiate(player.name, spawnPoint.position, Quaternion.identity);
+        SetupPlayer(playerInstance);
     }
 
     public void SpawnPlayer(Vector3 spawnLocation)
     {
-        GameObject player = PhotonNetwork.Instantiate(this.player.name, spawnLocation, Quaternion.identity);
-        player.GetComponent<PlayerSetup>().IsLocalPlayer();
-        player.GetComponent<Health>().IsLocalPlayer = true;
-        player.GetComponent<PhotonView>().RPC("SetNickname", RpcTarget.AllBuffered, nickname);
-        PhotonNetwork.LocalPlayer.NickName = nickname;
+        GameObject playerInstance = PhotonNetwork.Instantiate(player.name, spawnLocation, Quaternion.identity);
+        SetupPlayer(playerInstance);
     }
 
     public void SpawnPlane()
     {
         Debug.Log("Spawning plane");
         Transform spawnPlanePoint = spawnPlanePoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-
         PhotonNetwork.Instantiate(plane.name, spawnPlanePoint.position, Quaternion.identity);
     }
 
@@ -130,27 +108,44 @@ public class RoomManager : MonoBehaviourPunCallbacks
         try
         {
             Hashtable hash = PhotonNetwork.LocalPlayer.CustomProperties;
-
             hash["kills"] = kills;
             hash["deaths"] = deaths;
-
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
-        catch
+        catch { /* Ignore */ }
+    }
+
+    private Vector3 CalculateAssetPosition(int x, int y, float randomOffset)
+    {
+        float xPos = -875 + (1 / detailScale) * 1750 * x;
+        float zPos = 875 - (1 / detailScale) * 1750 * y;
+        return new Vector3(
+            xPos + Random.Range(-randomOffset, randomOffset),
+            0,
+            zPos + Random.Range(-randomOffset, randomOffset)
+        );
+    }
+
+    private void SpawnAsset(GameObject prefab, Vector3 position, float rotation, ref int numSpawned, ref int caseBomb)
+    {
+        if(prefab == assets[14])
         {
-            //Do nothing
+            PhotonNetwork.Instantiate(assets[14].name, position, Quaternion.Euler(0, rotation, 0));
+            numSpawned++;
+            caseBomb++;
+        }
+        else
+        {
+            Instantiate(prefab, position, Quaternion.Euler(0, rotation, 0));
+            numSpawned++;
         }
     }
 
     void GenerateAssets()
     {
-        //The true way to do this Gojo would be proud
         int numSpawned = 0;
         int caseBomb = 0;
-        int seed = PhotonNetwork.CurrentRoom.Name.GetHashCode();
-        int assetIndex = 0;
-
-        Random.InitState(seed); // Initialize the random number generator with the seed
+        Random.InitState(PhotonNetwork.CurrentRoom.Name.GetHashCode());
 
         for(int y = 0; y < detailScale; y++)
         {
@@ -158,54 +153,32 @@ public class RoomManager : MonoBehaviourPunCallbacks
             {
                 if(Random.Range(0f, 1f) < chanceOfSpawn && spawnAssets)
                 {
-                    float xPos = -875 + (1 / detailScale) * 1750 * x;
-                    float zPos = 875 - (1 / detailScale) * 1750 * y;
                     float randomRotation = Random.Range(0f, 360f);
-                        assetIndex = Random.Range(0, assets.Length);
-                        GameObject assetPrefab = assets[assetIndex]; // Assuming assets[] is an array of GameObjects (prefabs)
+                    int assetIndex = Random.Range(0, assets.Length);
+                    GameObject assetPrefab = assets[assetIndex];
+                    Vector3 spawnPosition = CalculateAssetPosition(x, y, offSet);
 
-                        if(assetIndex == 14)
-                        {
-                            if(Random.Range(0f, 1f) < chanceofBombSpawn)
-                            {
-                                // Spawn a case bomb
-                                Instantiate(assetPrefab, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
-                                numSpawned++;
-                                caseBomb++;
-                            }
-                            else 
-                            {
-                                assetIndex = Random.Range(0, assets.Length - 1);
-                                assetPrefab = assets[assetIndex];
-                                Instantiate(assetPrefab, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
-                                numSpawned++;
-                            }
-                        }
-                        else 
-                        {
-                            Instantiate(assetPrefab, new Vector3(xPos + Random.Range(-offSet, offSet), 0, zPos + Random.Range(-offSet, offSet)), Quaternion.Euler(0, randomRotation, 0));
-                            numSpawned++;
-                        }
+                    if(assetIndex == 14 && Random.Range(0f, 1f) >= chanceofBombSpawn)
+                    {
+                        assetIndex = Random.Range(0, assets.Length - 1);
+                        assetPrefab = assets[assetIndex];
                     }
+
+                    SpawnAsset(assetPrefab, spawnPosition, randomRotation, ref numSpawned, ref caseBomb);
                 }
             }
+        }
 
-            Debug.Log("Spawned " + numSpawned + " assets");
-            Debug.Log("Spawned " + caseBomb + " case bombs");
-            spawnAssets = false;
+        Debug.Log($"Spawned {numSpawned} assets");
+        Debug.Log($"Spawned {caseBomb} case bombs");
+        spawnAssets = false;
     }
 
     void CreateRoom()
     {
         int roomsWithSameName = roomList.checkRoomAgainst(roomNameToJoin);
-        Debug.Log("Rooms with same name: " + roomsWithSameName);
-        if(roomsWithSameName == 0)
-        {
-            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
-        }
-        else
-        {
-            PhotonNetwork.JoinOrCreateRoom(roomNameToJoin + " (" + roomsWithSameName + ")", null, null);
-        }
+        Debug.Log($"Rooms with same name: {roomsWithSameName}");
+        string finalRoomName = roomsWithSameName == 0 ? roomNameToJoin : $"{roomNameToJoin} ({roomsWithSameName})";
+        PhotonNetwork.JoinOrCreateRoom(finalRoomName, null, null);
     }
 }
