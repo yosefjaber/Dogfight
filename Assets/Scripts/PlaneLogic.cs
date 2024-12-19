@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 public class PlaneLogic : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class PlaneLogic : MonoBehaviour
     public AirplaneGun rightAirplaneGun; 
     public TextMeshProUGUI planeAmmoText;
     private int maxAmmo;
+    public float reloadTime = 2f;
+    private float reloadTimeCounter = 0f;
+    public PhotonView photonView;
 
     private void Start() 
     {
@@ -63,35 +67,46 @@ public class PlaneLogic : MonoBehaviour
             }
         }
 
+        //Shoot
         if(Input.GetMouseButton(0) && (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo) > 0)
         {
             //Timer in shoot so no need to worry about rate of fire
             leftAirplaneGun.Shoot();
             rightAirplaneGun.Shoot();
             planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
-            bulletsLeftText.UpdateBulletsLeft(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
         }
-        
-        // if(Input.GetKeyDown(KeyCode.R))
-        // {
-        //     leftAirplaneGun.currentAmmo = maxAmmo/2 ;
-        //     rightAirplaneGun.currentAmmo = maxAmmo/2;
-        //     planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
-        // }
-    }
-
-    private void FixedUpdate() 
-    {
-
     }
     
     public void ReloadPlane()
     {
-        leftAirplaneGun.currentAmmo = maxAmmo/2 ;
-        rightAirplaneGun.currentAmmo = maxAmmo/2;
-        planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
+        if (Input.GetKey(KeyCode.E))
+        {
+            reloadTimeCounter += Time.deltaTime;
+            if (reloadTimeCounter >= reloadTime)
+            {
+                photonView.RPC("Reload", RpcTarget.All);
+                reloadTimeCounter = 0f;
+                Debug.Log("Reloaded");
+            }
+            Debug.Log(reloadTimeCounter);
+        }
     }
-
+    
+    [PunRPC]
+    private void Reload()
+    {
+        leftAirplaneGun.Reload();
+        rightAirplaneGun.Reload();
+        planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
+        Debug.Log("Reload");
+        //bulletsLeftText.UpdateBulletsLeft(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
+    }
+    
+    public void updateText(int ammo)
+    {
+        planeAmmoText.text = ammo.ToString() + "/" + maxAmmo.ToString();
+    }
+    
     public void ExitPilot()
     {
         planeCamera.SetActive(false);

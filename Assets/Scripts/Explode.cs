@@ -23,12 +23,12 @@ public class Explode : MonoBehaviour
     
     void Start()
     {
-        // Check if the MasterClient is not already the owner
-        if (photonView.Owner != PhotonNetwork.MasterClient)
-        {
-            // Transfer ownership of this PhotonView to the MasterClient
-             photonView.TransferOwnership(PhotonNetwork.MasterClient);
-        }
+        // // Check if the MasterClient is not already the owner
+        // if (photonView.Owner != PhotonNetwork.MasterClient)
+        // {
+        //     // Transfer ownership of this PhotonView to the MasterClient
+        //      photonView.TransferOwnership(PhotonNetwork.MasterClient);
+        // }
     }
 
     private void OnTriggerEnter(Collider other)

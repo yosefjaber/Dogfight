@@ -47,6 +47,11 @@ MonoBehaviour:
   - Explosion
   - DestroyObject
   - MasterDestroy
+  - UpdateAmmoUI
+  - Reload
+  - Shoot
+  - shoot
+  - updateAmmo
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

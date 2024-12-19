@@ -74,10 +74,8 @@ public class LookingAtPlane : MonoBehaviour
         {
             hitObject = hit.transform.gameObject;
             hit.transform.gameObject.GetComponent<Renderer>().material = highlightColor;
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                hit.transform.gameObject.GetComponent<ReloadPlaneLogic>().ReloadPlane();
-            }
+            hit.transform.gameObject.GetComponent<ReloadPlaneLogic>().ReloadPlane();
+
         }
         else
         {

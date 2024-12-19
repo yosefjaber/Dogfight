@@ -14,6 +14,9 @@ public class EnterPlaneLogic : MonoBehaviour
     public GameObject MosuseFlightRig;
     public GameObject MouseFlightHud;
     public GameObject backCamera;
+    public PlaneLogic planeLogic;
+    public AirplaneGun leftAirplaneGun;
+    public AirplaneGun rightAirplaneGun;
 
     //private bool onPlane = false;
     [Space]
@@ -44,7 +47,7 @@ public class EnterPlaneLogic : MonoBehaviour
         plane.GetComponent<Rigidbody>().useGravity = false;
         plane.GetComponent<Rigidbody>().drag = 2f;
         plane.GetComponent<Rigidbody>().angularDrag = 5f;
-        //i wanna implement the line here
+        planeLogic.updateText(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
 
         PhotonView planePhotonView = plane.GetComponent<PhotonView>();
         if (planePhotonView != null)
