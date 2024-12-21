@@ -117,7 +117,6 @@ public class Weapon : MonoBehaviour
         if(Physics.Raycast(ray.origin, ray.direction, out hit, 1000f, PlayerMask))
         {
             PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
-
             if(hit.transform.gameObject.GetComponent<Health>())
             {
                 if(damage >= hit.transform.gameObject.GetComponent<Health>().health)

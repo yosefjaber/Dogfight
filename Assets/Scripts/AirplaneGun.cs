@@ -42,8 +42,8 @@ public class AirplaneGun : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
     
         // Set velocity directly to move the bullet forward, assuming bulletSpawnPoint is correctly oriented, also add the plane velocity to the rb
-        Vector3 planeVelocity = plane.GetComponent<Rigidbody>().velocity;
-        rb.velocity = (bulletSpawnPoint.forward * bulletSpeed) + planeVelocity;
+        Vector3 planeVelocity = plane.GetComponent<Rigidbody>().linearVelocity;
+        rb.linearVelocity = (bulletSpawnPoint.forward * bulletSpeed) + planeVelocity;
     
         Destroy(bullet, 5f); // Cleanup to avoid excessive GameObjects in the scene
     }
