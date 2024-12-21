@@ -45,8 +45,8 @@ public class EnterPlaneLogic : MonoBehaviour
         plane.GetComponent<PlaneLogic>().enabled = true;
         plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(true);
         plane.GetComponent<Rigidbody>().useGravity = false;
-        plane.GetComponent<Rigidbody>().drag = 2f;
-        plane.GetComponent<Rigidbody>().angularDrag = 5f;
+        plane.GetComponent<Rigidbody>().linearDamping = 2f;
+        plane.GetComponent<Rigidbody>().angularDamping = 5f;
         planeLogic.updateText(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
 
         PhotonView planePhotonView = plane.GetComponent<PhotonView>();

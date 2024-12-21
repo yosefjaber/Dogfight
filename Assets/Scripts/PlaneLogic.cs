@@ -116,7 +116,7 @@ public class PlaneLogic : MonoBehaviour
         MouseFlightRig.SetActive(false);
         plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(false);
         plane.GetComponent<Rigidbody>().useGravity = true;
-        plane.GetComponent<Rigidbody>().drag = 0.1f;
-        plane.GetComponent<Rigidbody>().angularDrag = 0.1f;
+        plane.GetComponent<Rigidbody>().linearDamping = 0.1f;
+        plane.GetComponent<Rigidbody>().angularDamping = 0.1f;
     }
 }

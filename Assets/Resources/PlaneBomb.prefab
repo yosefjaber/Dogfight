@@ -63,6 +63,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -187,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2850979f94d16147b9018a448a681a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
+  explosion: {fileID: 4593184484909914552, guid: 8aded7307b143043a9bf76a74df17fd2, type: 3}
   plane: {fileID: 0}
   leftGear: {fileID: 0}
   rightGear: {fileID: 0}

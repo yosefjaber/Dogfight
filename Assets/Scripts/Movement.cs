@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
         {
             if(jumping)
             {
-                rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpHeight, rb.linearVelocity.z);
             }
             else if(input.magnitude > 0.5f)
             {
@@ -56,9 +56,9 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                var velocity1 = rb.velocity;
+                var velocity1 = rb.linearVelocity;
                 velocity1 = new Vector3(velocity1.x * 0.2f * Time.fixedDeltaTime, velocity1.y, velocity1.z * 0.2f * Time.fixedDeltaTime);
-                rb.velocity = velocity1;
+                rb.linearVelocity = velocity1;
             }
         }
         else
@@ -77,7 +77,7 @@ public class Movement : MonoBehaviour
 
         targetVelocity *= speed;
 
-        Vector3 velocity = rb.velocity;
+        Vector3 velocity = rb.linearVelocity;
 
         if(input.magnitude > 0.5f)
         {
