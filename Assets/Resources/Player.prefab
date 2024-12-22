@@ -1980,7 +1980,7 @@ MonoBehaviour:
   damage: 25
   fireRate: 10
   camera: {fileID: 8997724662192631078}
-  hitVFX: {fileID: 4593184484909914552, guid: 8aded7307b143043a9bf76a74df17fd2, type: 3}
+  hitVFX: {fileID: 100000, guid: 852c3ed43cb54c02f921c9273b3f4d33, type: 3}
   ammo: 30
   magAmmo: 30
   ammoText: {fileID: 1480280953721504072}

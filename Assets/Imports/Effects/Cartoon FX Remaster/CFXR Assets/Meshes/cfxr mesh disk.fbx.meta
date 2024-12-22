@@ -100,5 +100,6 @@ AssetOrigin:
   productId: 109565
   packageName: Cartoon FX Remaster Free
   packageVersion: R 1.4.2
-  assetPath: Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr mesh disk.fbx
+  assetPath: Assets/Imports/Effects/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr mesh
+    disk.fbx
   uploadId: 717883
