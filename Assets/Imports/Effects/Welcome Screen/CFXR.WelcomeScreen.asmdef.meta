@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 109565
   packageName: Cartoon FX Remaster Free
   packageVersion: R 1.4.2
-  assetPath: Assets/JMO Assets/Welcome Screen/CFXR.WelcomeScreen.asmdef
+  assetPath: Assets/Imports/Effects/Welcome Screen/CFXR.WelcomeScreen.asmdef
   uploadId: 717883

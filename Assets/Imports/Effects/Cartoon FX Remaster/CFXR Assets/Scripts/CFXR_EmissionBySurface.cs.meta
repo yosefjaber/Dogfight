@@ -14,5 +14,5 @@ AssetOrigin:
   productId: 109565
   packageName: Cartoon FX Remaster Free
   packageVersion: R 1.4.2
-  assetPath: Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Scripts/CFXR_EmissionBySurface.cs
+  assetPath: Assets/Imports/Effects/Cartoon FX Remaster/CFXR Assets/Scripts/CFXR_EmissionBySurface.cs
   uploadId: 717883
