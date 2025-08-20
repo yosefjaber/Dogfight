@@ -12,6 +12,7 @@ public class LookingAtPlane : MonoBehaviour
     public LayerMask Enterbutton;
     public LayerMask Exitbutton;
     public LayerMask ReloadButton;
+    public LayerMask EnterGunnerButton;
     private GameObject hitObject = null;
 
     // Update is called once per frame
@@ -75,7 +76,12 @@ public class LookingAtPlane : MonoBehaviour
             hitObject = hit.transform.gameObject;
             hit.transform.gameObject.GetComponent<Renderer>().material = highlightColor;
             hit.transform.gameObject.GetComponent<ReloadPlaneLogic>().ReloadPlane();
-
+        }
+        else if (Physics.Raycast(ray, out hit, lookDistance, EnterGunnerButton))
+        {
+            hitObject = hit.transform.gameObject;
+            hit.transform.gameObject.GetComponent<Renderer>().material = highlightColor;
+            hit.transform.gameObject.GetComponent<EnterGunner>().EnterGunnerLogic(this.gameObject);
         }
         else
         {

@@ -12,7 +12,5 @@ public class StayUpright : MonoBehaviour
 
         // Smoothly interpolate to the target rotation (optional for smooth movement)
         transform.rotation = Quaternion.Slerp(plane.transform.rotation, targetRotation, Time.deltaTime * 5.0f);
-        
-        Debug.Log("UprightDirection: " + UprightDirection);
     }
 }
