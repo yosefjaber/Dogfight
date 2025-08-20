@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03df47adf7b00cf45a24385b96c60648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookDistance: 5
+  lookDistance: 6
   playerCamera: {fileID: 8997724662192631078}
   highlightColor: {fileID: 2100000, guid: c5a7e80ee814b914caa12af42a4096d8, type: 2}
   normalColor: {fileID: 2100000, guid: 11136e7f688d1f745812980a159d9eee, type: 2}
@@ -1471,6 +1471,9 @@ MonoBehaviour:
   ReloadButton:
     serializedVersion: 2
     m_Bits: 4096
+  EnterGunnerButton:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &5448062478475420188
 MonoBehaviour:
   m_ObjectHideFlags: 0

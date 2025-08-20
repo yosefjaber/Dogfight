@@ -7,7 +7,6 @@ using PhotonNetwork = Photon.Pun.PhotonNetwork;
 public class EnterPlaneLogic : MonoBehaviour
 {
     [Header("References")]
-    private RoomManager roomManager;
     public GameObject planeRoom;
     public GameObject plane;
     public GameObject planeCamera;
@@ -23,11 +22,6 @@ public class EnterPlaneLogic : MonoBehaviour
     [Header("Time Thresholds")]
     private float timeSinceEntered = 0f;
     private float timeThreshold = 0.1f;
-
-    void Start()
-    {
-        roomManager = GameObject.Find("RoomManager").GetComponent<RoomManager>();
-    }
 
     // Update is called once per frame
     void Update()
