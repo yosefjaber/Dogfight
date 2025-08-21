@@ -81,7 +81,10 @@ public class LookingAtPlane : MonoBehaviour
         {
             hitObject = hit.transform.gameObject;
             hit.transform.gameObject.GetComponent<Renderer>().material = highlightColor;
-            hit.transform.gameObject.GetComponent<EnterGunner>().EnterGunnerLogic(this.gameObject);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                hit.transform.gameObject.GetComponent<EnterGunner>().EnterGunnerLogic(this.gameObject);
+            }
         }
         else
         {
