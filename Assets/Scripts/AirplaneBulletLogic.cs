@@ -23,7 +23,7 @@ public class AirplaneBulletLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(GetComponent<PhotonView>().IsMine && !other.transform.gameObject.GetComponent<DealDamagePlaneGun>())
+        if (GetComponent<PhotonView>().IsMine && !other.transform.gameObject.GetComponent<DealDamagePlaneGun>())
         {
             PhotonNetwork.Instantiate(bulletExplosion.name, transform.position, Quaternion.identity);
             DamageUtility.CalculateExplosionDamage(transform.position, radius, damage);
