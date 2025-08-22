@@ -77,6 +77,7 @@ public class LookingAtPlane : MonoBehaviour
             hit.transform.gameObject.GetComponent<Renderer>().material = highlightColor;
             hit.transform.gameObject.GetComponent<ReloadPlaneLogic>().ReloadPlane();
         }
+        //Enter Gunner Button
         else if (Physics.Raycast(ray, out hit, lookDistance, EnterGunnerButton))
         {
             hitObject = hit.transform.gameObject;
