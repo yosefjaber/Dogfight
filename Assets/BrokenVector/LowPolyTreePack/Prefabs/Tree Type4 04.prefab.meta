@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 1daeacade56254d469596620c179634e
+labels:
+- dead
+- plant
+- pack
+- low-poly
+- set
+- lowpoly
+- tree
+timeCreated: 1457642402
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 57866
+  packageName: Low Poly Tree Pack
+  packageVersion: 1.3
+  assetPath: Assets/BrokenVector/LowPolyTreePack/Prefabs/Tree Type4 04.prefab
+  uploadId: 253861

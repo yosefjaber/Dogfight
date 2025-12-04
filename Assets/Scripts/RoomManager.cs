@@ -12,8 +12,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [Header("Player")]
     public GameObject player;
-    public Transform[] spawnPoints;
-    public Transform[] spawnPlanePoints;
+    public float PlaceX;
+    public float PlaceZ;
+    public float PlaneX;
+    public float PlaneZ;
 
     [Header("UI")]
     public GameObject roomCam;
@@ -32,14 +34,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("Plane")] 
     public GameObject plane;
 
-    [Header("Map Generation")]
-    public GameObject test;
-    public GameObject[] assets;
-    public float detailScale = 20f;
-    [Range(0f, 1f)] public float chanceOfSpawn = 0.5f;
-    [Range(0f, 1f)] public float chanceofBombSpawn = 0.1f;
-    public float offSet = 5f;
-    public bool spawnAssets = true;
+    [Header("Terrain Generation")]
+    public TerrainGenerator terrainGenerator;
+
+    private GameObject localPlayerInstance;
     #endregion
 
     private void Awake() => instance = this;
@@ -71,8 +69,30 @@ public class RoomManager : MonoBehaviourPunCallbacks
         roomCam.SetActive(false);
 
         SpawnPlayer();
+        
+        Debug.Log("About to start terrain generation...");
+        StartTerrainGeneration();
+
         SpawnPlane();
-        GenerateAssets();
+    }
+
+    private void StartTerrainGeneration()
+    {
+        Debug.Log($"StartTerrainGeneration called - TerrainGen null? {terrainGenerator == null}, Player null? {localPlayerInstance == null}");
+        
+        if (terrainGenerator != null && localPlayerInstance != null)
+        {
+            Random.InitState(PhotonNetwork.CurrentRoom.Name.GetHashCode());
+            Debug.Log($"Setting viewer to: {localPlayerInstance.name}");
+            terrainGenerator.viewer = localPlayerInstance.transform;
+            Debug.Log("Calling InitializeTerrain...");
+            terrainGenerator.InitializeTerrain();
+            Debug.Log("Terrain generation started with player as viewer");
+        }
+        else
+        {
+            Debug.LogWarning("Cannot start terrain generation - missing TerrainGenerator or Player");
+        }
     }
 
     private void SetupPlayer(GameObject playerInstance)
@@ -81,12 +101,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
         playerInstance.GetComponent<Health>().IsLocalPlayer = true;
         playerInstance.GetComponent<PhotonView>().RPC("SetNickname", RpcTarget.AllBuffered, nickname);
         PhotonNetwork.LocalPlayer.NickName = nickname;
+
+        localPlayerInstance = playerInstance;
     }
 
     public void SpawnPlayer()
     {
-        Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-        GameObject playerInstance = PhotonNetwork.Instantiate(player.name, spawnPoint.position, Quaternion.identity);
+        PlaceX = Random.Range(300, 316);
+        PlaceZ = Random.Range(-15, 15);
+        Vector3 randomPlayerSpawnPoint = new Vector3(PlaceX, 90, PlaceZ);
+        GameObject playerInstance = PhotonNetwork.Instantiate(player.name, randomPlayerSpawnPoint, Quaternion.identity);
         SetupPlayer(playerInstance);
     }
 
@@ -98,9 +122,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void SpawnPlane()
     {
-        Debug.Log("Spawning plane");
-        Transform spawnPlanePoint = spawnPlanePoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-        PhotonNetwork.Instantiate(plane.name, spawnPlanePoint.position, Quaternion.identity);
+        PlaneX = Random.Range(284, 300);
+        PlaneZ = Random.Range(-15, 15);
+        Vector3 randomPlaneSpawnPoint = new Vector3(PlaneX, 90, PlaneZ);
+        PhotonNetwork.Instantiate(plane.name, randomPlaneSpawnPoint, Quaternion.identity);
     }
 
     public void SetHashes()
@@ -113,65 +138,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
         catch { /* Ignore */ }
-    }
-
-    private Vector3 CalculateAssetPosition(int x, int y, float randomOffset)
-    {
-        float xPos = -875 + (1 / detailScale) * 1750 * x;
-        float zPos = 875 - (1 / detailScale) * 1750 * y;
-        return new Vector3(
-            xPos + Random.Range(-randomOffset, randomOffset),
-            0,
-            zPos + Random.Range(-randomOffset, randomOffset)
-        );
-    }
-
-    private void SpawnAsset(GameObject prefab, Vector3 position, float rotation, ref int numSpawned, ref int caseBomb)
-    {
-        if(prefab == assets[14])
-        {
-            PhotonNetwork.Instantiate(assets[14].name, position, Quaternion.Euler(0, rotation, 0));
-            numSpawned++;
-            caseBomb++;
-        }
-        else
-        {
-            Instantiate(prefab, position, Quaternion.Euler(0, rotation, 0));
-            numSpawned++;
-        }
-    }
-
-    void GenerateAssets()
-    {
-        int numSpawned = 0;
-        int caseBomb = 0;
-        Random.InitState(PhotonNetwork.CurrentRoom.Name.GetHashCode());
-
-        for(int y = 0; y < detailScale; y++)
-        {
-            for(int x = 0; x < detailScale; x++)
-            {
-                if(Random.Range(0f, 1f) < chanceOfSpawn && spawnAssets)
-                {
-                    float randomRotation = Random.Range(0f, 360f);
-                    int assetIndex = Random.Range(0, assets.Length);
-                    GameObject assetPrefab = assets[assetIndex];
-                    Vector3 spawnPosition = CalculateAssetPosition(x, y, offSet);
-
-                    if(assetIndex == 14 && Random.Range(0f, 1f) >= chanceofBombSpawn)
-                    {
-                        assetIndex = Random.Range(0, assets.Length - 1);
-                        assetPrefab = assets[assetIndex];
-                    }
-
-                    SpawnAsset(assetPrefab, spawnPosition, randomRotation, ref numSpawned, ref caseBomb);
-                }
-            }
-        }
-
-        Debug.Log($"Spawned {numSpawned} assets");
-        Debug.Log($"Spawned {caseBomb} case bombs");
-        spawnAssets = false;
     }
 
     void CreateRoom()
