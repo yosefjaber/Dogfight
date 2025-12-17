@@ -18,12 +18,11 @@ public class GunnerMouseLogic : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * sens;
 
         Vector3 currentRotation = gun.transform.eulerAngles;
-        Debug.Log("y: " + currentRotation.y);
-        Debug.Log("mouseX: " + mouseX);
-        if (currentRotation.y + mouseX > -80 && currentRotation.y + mouseX < 80) {
-            currentRotation.y += mouseX;   
-        }
-        currentRotation.x -= mouseY;
+        Debug.Log("y: " + currentRotation.x);
+        Debug.Log("mouseX: " + mouseY);
+
+        currentRotation.x -= mouseY;   
+        currentRotation.y += mouseX;
 
         gun.transform.eulerAngles = currentRotation;
         if(Input.GetKeyDown(KeyCode.E))

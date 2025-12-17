@@ -7,6 +7,7 @@ public class EnterGunner : MonoBehaviour
     [Header("References")]
     public GameObject gunCamera;
     public GameObject bulletSpawn;
+    public GameObject rotatePoint;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,5 +25,6 @@ public class EnterGunner : MonoBehaviour
         PhotonNetwork.Destroy(player);
         gunCamera.SetActive(true);
         bulletSpawn.SetActive(true);
+        rotatePoint.GetComponent<GunnerLogic>().enabled = true;
     }
 }
