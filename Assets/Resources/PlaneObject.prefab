@@ -2504,8 +2504,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 5059650234748985301}
-  Plane: {fileID: 0}
-  planeLogic: {fileID: 0}
+  plane: {fileID: 1402859973316142447}
+  planeLogic: {fileID: 5969768830683822901}
+  EngineLocation: {fileID: 8925620405238715328}
+  Flames: {fileID: 8764043878647920493, guid: 128c533f4b4654cedbdf1076c4a47803, type: 3}
 --- !u!1 &1450946671192357220
 GameObject:
   m_ObjectHideFlags: 0
@@ -7917,7 +7919,7 @@ Transform:
   m_GameObject: {fileID: 8925620405238715328}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.04245633, y: 2.14, z: 9.01}
+  m_LocalPosition: {x: -0.04245633, y: 3.53, z: 9.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

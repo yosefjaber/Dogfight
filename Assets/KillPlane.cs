@@ -1,27 +1,35 @@
 using UnityEngine;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 public class KillPlane : MonoBehaviour
 {
     public Health health;
-    public GameObject Plane;
-    public Plane planeScript;
+    public GameObject plane;
     public PlaneLogic planeLogic;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject EngineLocation;
+    public GameObject Flames;
+    private PhotonView photonView;
+    private void Awake()
     {
-        
+        photonView = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            blowUpPlane();
+        }
     }
 
     public void blowUpPlane()
     {
+        plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(false);
         planeLogic.enabled = false;
-        planeScript.isEnabled = false;
-        Plane.GetComponent<Rigidbody>().useGravity = true;
+        plane.GetComponent<Rigidbody>().useGravity = true;
+        GameObject flames = PhotonNetwork.Instantiate(Flames.name, EngineLocation.transform.position, EngineLocation.transform.rotation);
+        flames.transform.SetParent(EngineLocation.transform);
     }
 }
