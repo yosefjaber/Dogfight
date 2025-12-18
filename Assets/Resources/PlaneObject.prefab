@@ -2136,6 +2136,9 @@ GameObject:
   - component: {fileID: 389333318044411463}
   - component: {fileID: 1865295465882939500}
   - component: {fileID: 6211415054051597225}
+  - component: {fileID: 5059650234748985301}
+  - component: {fileID: 8498714247650962395}
+  - component: {fileID: 6210007601537404244}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -2173,6 +2176,7 @@ RectTransform:
   - {fileID: 5028970231391380466}
   - {fileID: 8275878236919652669}
   - {fileID: 4090668014655625938}
+  - {fileID: 670519283665554080}
   m_Father: {fileID: 1064898015671995859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2456,6 +2460,52 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &5059650234748985301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402859973316142447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0841392a631d194a86b8693c9c16d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000
+  IsLocalPlayer: 0
+  testPlayer: 0
+  hurtColor: {fileID: 0}
+  isPlane: 1
+  healthText: {fileID: 0}
+--- !u!114 &8498714247650962395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402859973316142447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f1c6d73cd6c983487455498195dcf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 5059650234748985301}
+--- !u!114 &6210007601537404244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402859973316142447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58dcd5a8e6cf0c3a8da67ad485382ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 5059650234748985301}
+  Plane: {fileID: 0}
+  planeLogic: {fileID: 0}
 --- !u!1 &1450946671192357220
 GameObject:
   m_ObjectHideFlags: 0
@@ -7842,6 +7892,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8656fc5ac724dc14692f1907ec8f0daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8925620405238715328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670519283665554080}
+  m_Layer: 0
+  m_Name: EngineLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &670519283665554080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925620405238715328}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.04245633, y: 2.14, z: 9.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9208348980535904304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8950892051031364800
 GameObject:
   m_ObjectHideFlags: 0

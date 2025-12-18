@@ -12,6 +12,9 @@ public class Health : MonoBehaviour
     public bool testPlayer;
     public Material hurtColor;
     private Material originalColor;
+    public bool isPlane;
+
+    private KillPlane killPlane;
 
     [Header("UI")]
     public TextMeshProUGUI healthText;
@@ -19,6 +22,10 @@ public class Health : MonoBehaviour
     private void Start()
     {
         originalColor = GetComponent<Renderer>().material;
+        if(isPlane)
+        {
+            killPlane = GetComponent<KillPlane>();
+        }
     }
 
     [PunRPC]
@@ -39,17 +46,24 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            if (IsLocalPlayer)
+            if (isPlane)
             {
-                RoomManager.instance.SpawnPlayer();
-                RoomManager.instance.deaths++;
-                RoomManager.instance.SetHashes();
-                PhotonNetwork.LocalPlayer.AddScore(-100);
+                killPlane.blowUpPlane();
             }
-            
-            if(!testPlayer)
+            else
             {
-                Destroy(gameObject);
+                if (IsLocalPlayer)
+                {
+                    RoomManager.instance.SpawnPlayer();
+                    RoomManager.instance.deaths++;
+                    RoomManager.instance.SetHashes();
+                    PhotonNetwork.LocalPlayer.AddScore(-100);
+                }
+                
+                if(!testPlayer)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
