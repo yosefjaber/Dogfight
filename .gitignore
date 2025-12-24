@@ -71,3 +71,16 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignore Unity auto-generated folders inside the subfolder
+My project/[Ll]ibrary/
+My project/[Tt]emp/
+My project/[Oo]bj/
+My project/[Bb]uild/
+My project/[Bb]uilds/
+My project/[Ll]ogs/
+My project/[Uu]ser[Ss]ettings/
+
+# Ignore MemoryCaptures and Recordings
+My project/[Mm]emoryCaptures/
+My project/[Rr]ecordings/
