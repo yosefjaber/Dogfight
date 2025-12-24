@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
         
         if(testPlayer)
         {
-            Debug.Log("Health: " + health);
+            //Debug.Log("Health: " + health);
             GetComponent<Renderer>().material = hurtColor;
             Invoke("ResetColor", 0.3f);
         }

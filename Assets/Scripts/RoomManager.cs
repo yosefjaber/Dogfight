@@ -42,7 +42,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public bool spawnAssets = true;
     #endregion
 
-    private void Awake() => instance = this;
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+
+            Destroy(gameObject);
+            Debug.LogError("There is more than one RoomManager");
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject); // optional
+    }
+
 
     public void ChangeNickname(string name) => nickname = name;
 
@@ -180,5 +193,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log($"Rooms with same name: {roomsWithSameName}");
         string finalRoomName = roomsWithSameName == 0 ? roomNameToJoin : $"{roomNameToJoin} ({roomsWithSameName})";
         PhotonNetwork.JoinOrCreateRoom(finalRoomName, null, null);
+    }
+
+    public void Debugger()
+    {
+        Debug.Log("This is Network Destroyer working");
     }
 }

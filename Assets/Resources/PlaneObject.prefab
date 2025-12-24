@@ -589,6 +589,8 @@ MonoBehaviour:
   gunCamera: {fileID: 5580689581151952900}
   bulletSpawn: {fileID: 6648223277846648881}
   rotatePoint: {fileID: 3323601533747262827}
+  GunnerObject: {fileID: 0}
+  riderInfo: {fileID: 4425320756772923747}
 --- !u!1 &551593355788260958
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +689,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551593355788260958}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &2999407189441987032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2139,6 +2141,7 @@ GameObject:
   - component: {fileID: 5059650234748985301}
   - component: {fileID: 8498714247650962395}
   - component: {fileID: 6210007601537404244}
+  - component: {fileID: 4425320756772923747}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -2505,9 +2508,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 5059650234748985301}
   plane: {fileID: 1402859973316142447}
+  PlaneObject: {fileID: 0}
   planeLogic: {fileID: 5969768830683822901}
   EngineLocation: {fileID: 8925620405238715328}
   Flames: {fileID: 8764043878647920493, guid: 128c533f4b4654cedbdf1076c4a47803, type: 3}
+--- !u!114 &4425320756772923747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402859973316142447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b914b418b4b7ba5989c9d53807307ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riders: []
+  Gunner: {fileID: 0}
+  photonView: {fileID: 389333318044411463}
 --- !u!1 &1450946671192357220
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,7 +3426,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992464735493241191}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &7482393779066732886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3651,7 +3670,7 @@ GameObject:
   - component: {fileID: 4872153702498806293}
   - component: {fileID: 335406395192329911}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: GunnerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5184,7 +5203,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5580689581151952900}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &6034489088813739033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6841,7 +6860,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7620665491978329430}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &8945595597490349884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6997,7 +7016,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7677038123843267073}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &1836306183330511689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7307,7 +7326,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196607962599574017}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &2296239429957214791
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,13 +32,14 @@ public class LookingAtPlane : MonoBehaviour
         RaycastHit hit;
 
         int PlayerMask = 1 << LayerMask.NameToLayer("LocalPlayer");
-        //Invert the bitmask to ignore the specified layer
+        // Invert the bitmask to ignore the specified layer
         PlayerMask = ~PlayerMask;
 
         if (Physics.Raycast(ray, out hit, lookDistance, PlayerMask))
         {
             if (hit.transform.gameObject.GetComponent<EnterPlaneRoom>())
             {
+                hit.transform.gameObject.GetComponent<RiderInfo>().AddRider(this.gameObject.GetComponent<PhotonView>().ViewID);
                 this.transform.position = hit.transform.gameObject.GetComponent<EnterPlaneRoom>().PlaneRoom.transform.position;
             }
         }

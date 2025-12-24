@@ -52,4 +52,51 @@ public class NetworkDestroyer : MonoBehaviourPun
         
         PhotonNetwork.Destroy(view.gameObject);
     }
+
+    public void RequestDisable(GameObject obj)
+    {
+        PhotonView photonView = obj.GetComponent<PhotonView>();
+        // Function name, then targets, then parameters
+        NetworkDestroyer.Instance.photonView.RPC("NetworkDisable", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+    }
+
+    [PunRPC]
+    public void NetworkDisable(int viewID)
+    {
+        PhotonView view = PhotonView.Find(viewID);
+        if (view != null)
+        {
+            view.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("There is no view!");
+        }
+    }
+
+    public void RequestEnable(GameObject obj)
+    {
+        PhotonView photonView = obj.GetComponent<PhotonView>();
+        // Function name, then targets, then parameters
+        NetworkDestroyer.Instance.photonView.RPC("NetworkEnable", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+    }
+
+    [PunRPC]
+    public void NetworkEnable(int viewID)
+    {
+        PhotonView view = PhotonView.Find(viewID);
+        if (view != null)
+        {
+            view.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("There is no view!");
+        }
+    }
+
+    public void Debugger()
+    {
+        Debug.Log("This is Network Destroyer working");
+    }
 }

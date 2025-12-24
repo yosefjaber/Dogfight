@@ -8,11 +8,15 @@ public class EnterGunner : MonoBehaviour
     public GameObject gunCamera;
     public GameObject bulletSpawn;
     public GameObject rotatePoint;
+
+    public GameObject GunnerObject;
+    public RiderInfo riderInfo;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
+
 
     // Update is called once per frame
     void Update()
@@ -22,9 +26,11 @@ public class EnterGunner : MonoBehaviour
 
     public void EnterGunnerLogic(GameObject player)
     {
-        PhotonNetwork.Destroy(player);
+        riderInfo.photonView.RPC("SetGunner", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+        NetworkDestroyer.Instance.RequestDisable(player);
         gunCamera.SetActive(true);
         bulletSpawn.SetActive(true);
-        rotatePoint.GetComponent<GunnerLogic>().enabled = true;
+        GunnerLogic gunnerLogic = rotatePoint.GetComponent<GunnerLogic>();
+        gunnerLogic.enabled = true;
     }
 }

@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class DebugPlaneHealth : MonoBehaviour
+public class StaticDebugger : MonoBehaviour
 {
-    public Health health;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,6 +11,10 @@ public class DebugPlaneHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(health.health);
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("Hello");
+            NetworkDestroyer.Instance.RequestDisable(this.gameObject);
+        }
     }
 }
