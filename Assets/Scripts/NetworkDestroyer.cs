@@ -97,6 +97,6 @@ public class NetworkDestroyer : MonoBehaviourPun
 
     public void Debugger()
     {
-        Debug.Log("This is Network Destroyer working");
+        Debug.LogError("This is Network Destroyer working");
     }
 }

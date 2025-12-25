@@ -2250,6 +2250,8 @@ MonoBehaviour:
   planeAmmoText: {fileID: 8629399016809551442}
   reloadTime: 2
   photonView: {fileID: 389333318044411463}
+  riderInfo: {fileID: 4425320756772923747}
+  Pilot: {fileID: 0}
 --- !u!114 &9057227840643584998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2508,7 +2510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 5059650234748985301}
   plane: {fileID: 1402859973316142447}
-  PlaneObject: {fileID: 0}
+  PlaneObject: {fileID: 1064898015671995858}
   planeLogic: {fileID: 5969768830683822901}
   EngineLocation: {fileID: 8925620405238715328}
   Flames: {fileID: 8764043878647920493, guid: 128c533f4b4654cedbdf1076c4a47803, type: 3}
@@ -2525,6 +2527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riders: []
+  Driver: {fileID: 0}
   Gunner: {fileID: 0}
   photonView: {fileID: 389333318044411463}
 --- !u!1 &1450946671192357220
@@ -3785,6 +3788,8 @@ MonoBehaviour:
   bulletSpawn: {fileID: 6648223277846648881}
   sens: 1
   playerPoint: {fileID: 1246218196788070726}
+  riderInfo: {fileID: 4425320756772923747}
+  gunnerUser: {fileID: 0}
 --- !u!1 &3538604881131028788
 GameObject:
   m_ObjectHideFlags: 0
@@ -6351,6 +6356,7 @@ MonoBehaviour:
   planeLogic: {fileID: 5969768830683822901}
   leftAirplaneGun: {fileID: 5609023961450180602}
   rightAirplaneGun: {fileID: 6415024131731172764}
+  riderInfo: {fileID: 4425320756772923747}
 --- !u!1 &7151520575040638531
 GameObject:
   m_ObjectHideFlags: 0

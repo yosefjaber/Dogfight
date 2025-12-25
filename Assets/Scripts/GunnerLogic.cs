@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class GunnerLogic : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class GunnerLogic : MonoBehaviour
     public float sens = 1f;
     private RoomManager roomManager;
     public Transform playerPoint;
+
+    public RiderInfo riderInfo;
+
+    public GameObject gunnerUser;
 
     float xRoation = 0f; 
     float yRotation = 0f;
@@ -35,7 +40,8 @@ public class GunnerLogic : MonoBehaviour
     }
     void ExitGunner()
     {
-        roomManager.SpawnPlayer(playerPoint.position);
+        riderInfo.photonView.RPC("PopGunner", RpcTarget.All);
+        NetworkDestroyer.Instance.RequestEnable(gunnerUser);
         this.gameObject.GetComponent<GunnerLogic>().enabled = false;
         gunCamera.SetActive(false);
         bulletSpawn.SetActive(false);

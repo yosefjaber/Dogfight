@@ -19,13 +19,18 @@ public class Health : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI healthText;
 
+    private void Awake()
+    {
+        if(isPlane)
+        {
+            killPlane = this.gameObject.GetComponent<KillPlane>();
+        }
+    }
+
+
     private void Start()
     {
         originalColor = GetComponent<Renderer>().material;
-        if(isPlane)
-        {
-            killPlane = GetComponent<KillPlane>();
-        }
     }
 
     [PunRPC]
@@ -35,12 +40,13 @@ public class Health : MonoBehaviour
         
         if(testPlayer)
         {
-            //Debug.Log("Health: " + health);
+            Debug.Log("Health: " + health);
             GetComponent<Renderer>().material = hurtColor;
             Invoke("ResetColor", 0.3f);
         }
-        else
+        else if (!isPlane)
         {
+
             healthText.text = health.ToString();
         }
 

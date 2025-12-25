@@ -32,5 +32,6 @@ public class EnterGunner : MonoBehaviour
         bulletSpawn.SetActive(true);
         GunnerLogic gunnerLogic = rotatePoint.GetComponent<GunnerLogic>();
         gunnerLogic.enabled = true;
+        gunnerLogic.gunnerUser = player;
     }
 }

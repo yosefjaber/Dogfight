@@ -34,6 +34,7 @@ public class KillPlane : MonoBehaviour
 
     public void blowUpPlane()
     {
+        Debug.Log("Time to blow up");
         Vector3 linearVelocity = rb.linearVelocity;
         Vector3 angularVelocity = rb.angularVelocity;
         plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(false);

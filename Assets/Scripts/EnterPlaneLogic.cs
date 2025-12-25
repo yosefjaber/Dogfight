@@ -17,6 +17,8 @@ public class EnterPlaneLogic : MonoBehaviour
     public AirplaneGun leftAirplaneGun;
     public AirplaneGun rightAirplaneGun;
 
+    public RiderInfo riderInfo;
+
     //private bool onPlane = false;
     [Space]
     [Header("Time Thresholds")]
@@ -31,31 +33,41 @@ public class EnterPlaneLogic : MonoBehaviour
 
     public void EnterPlane(GameObject player)
     {
-        PhotonNetwork.Destroy(player);
-        MouseFlightHud.SetActive(true);
-        MosuseFlightRig.SetActive(true);
-        planeCamera.SetActive(true);
-        backCamera.SetActive(false);
-        plane.GetComponent<PlaneLogic>().enabled = true;
-        plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(true);
-        plane.GetComponent<Rigidbody>().useGravity = false;
-        plane.GetComponent<Rigidbody>().linearDamping = 2f;
-        plane.GetComponent<Rigidbody>().angularDamping = 5f;
-        planeLogic.updateText(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
+        NetworkDestroyer.Instance.RequestDisable(player);
 
-        PhotonView planePhotonView = plane.GetComponent<PhotonView>();
-        if (planePhotonView != null)
+        if (riderInfo.IsDriver())
         {
-            // Make sure we don't already own the plane
-            if (!planePhotonView.IsMine)
-            {
-                // Request ownership of the PhotonView
-                planePhotonView.RequestOwnership();
-            }
+            Debug.Log("Cant enter driver it is occupied");
         }
         else
         {
-            Debug.LogError("No PhotonView found on the plane GameObject!");
+            riderInfo.photonView.RPC("SetDriver", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+            planeLogic.Pilot = player;
+            MouseFlightHud.SetActive(true);
+            MosuseFlightRig.SetActive(true);
+            planeCamera.SetActive(true);
+            backCamera.SetActive(false);
+            plane.GetComponent<PlaneLogic>().enabled = true;
+            plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(true);
+            plane.GetComponent<Rigidbody>().useGravity = false;
+            plane.GetComponent<Rigidbody>().linearDamping = 2f;
+            plane.GetComponent<Rigidbody>().angularDamping = 5f;
+            planeLogic.updateText(leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo);
+
+            PhotonView planePhotonView = plane.GetComponent<PhotonView>();
+            if (planePhotonView != null)
+            {
+                // Make sure we don't already own the plane
+                if (!planePhotonView.IsMine)
+                {
+                    // Request ownership of the PhotonView
+                    planePhotonView.RequestOwnership();
+                }
+            }
+            else
+            {
+                Debug.LogError("No PhotonView found on the plane GameObject!");
+            }
         }
     }
 }

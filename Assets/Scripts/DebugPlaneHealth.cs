@@ -12,6 +12,6 @@ public class DebugPlaneHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(health.health);
+        Debug.Log(health.health);
     }
 }

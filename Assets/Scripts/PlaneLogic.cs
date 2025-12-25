@@ -29,6 +29,8 @@ public class PlaneLogic : MonoBehaviour
     public float reloadTime = 2f;
     private float reloadTimeCounter = 0f;
     public PhotonView photonView;
+    public RiderInfo riderInfo;
+    public GameObject Pilot;
 
     private void Start() 
     {
@@ -109,8 +111,10 @@ public class PlaneLogic : MonoBehaviour
     
     public void ExitPilot()
     {
+        riderInfo.photonView.RPC("PopDriver", RpcTarget.All);
+        NetworkDestroyer.Instance.RequestEnable(Pilot);
+        
         planeCamera.SetActive(false);
-        roomManager.SpawnPlayer(playerPoint.position);
         this.enabled = false;
         MouseFlightHud.SetActive(false);
         MouseFlightRig.SetActive(false);
