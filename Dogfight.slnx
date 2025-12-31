@@ -1,0 +1,21 @@
+﻿<Solution>
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="KinoBloom.Runtime.csproj" />
+  <Project Path="PhotonUnityNetworking.Editor.csproj" />
+  <Project Path="PhotonUnityNetworking.csproj" />
+  <Project Path="ToonyColorsPro.Demo.Editor.csproj" />
+  <Project Path="PhotonUnityNetworking.Demos.csproj" />
+  <Project Path="PhotonRealtime.csproj" />
+  <Project Path="PhotonUnityNetworking.Utilities.csproj" />
+  <Project Path="PunDemos.DemoHubEditor.csproj" />
+  <Project Path="CFXRRuntime.csproj" />
+  <Project Path="PunDemos.DemoSlotcarEditor.csproj" />
+  <Project Path="PhotonChat.csproj" />
+  <Project Path="CFXREditor.csproj" />
+  <Project Path="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj" />
+  <Project Path="CFXR.WelcomeScreen.csproj" />
+  <Project Path="OccaSoftware.Crosshairs.Editor.csproj" />
+  <Project Path="CFXRDemo.csproj" />
+  <Project Path="PhotonUnityNetworking.Utilities.Culling.Editor.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+</Solution>

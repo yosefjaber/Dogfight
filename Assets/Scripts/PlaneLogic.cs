@@ -30,6 +30,8 @@ public class PlaneLogic : MonoBehaviour
     private float reloadTimeCounter = 0f;
     public PhotonView photonView;
     public RiderInfo riderInfo;
+
+    [HideInInspector]
     public GameObject Pilot;
 
     private void Start() 

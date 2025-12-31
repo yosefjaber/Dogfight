@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     public Material hurtColor;
     private Material originalColor;
     public bool isPlane;
+    private bool blownUp = false;
 
     private KillPlane killPlane;
 
@@ -52,9 +53,10 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            if (isPlane)
+            if (isPlane && !blownUp)
             {
-                killPlane.blowUpPlane();
+                killPlane.BlowUpPlane();
+                blownUp = true;
             }
             else
             {

@@ -52,5 +52,5 @@
         "Temp/": true
     },
     "dotnet.preferCSharpExtension": true,
-    "dotnet.defaultSolution": "Dogfight.sln"
+    "dotnet.defaultSolution": "Dogfight.slnx"
 }

@@ -337,7 +337,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1602190932}
   m_HandleRect: {fileID: 1602190931}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1084,6 +1084,8 @@ GameObject:
   - component: {fileID: 191980365}
   - component: {fileID: 191980364}
   - component: {fileID: 191980366}
+  - component: {fileID: 191980367}
+  - component: {fileID: 191980368}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -1175,6 +1177,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1330180f84064286ba2125e231b187bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &191980367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191980363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &191980368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191980363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffa16459ffc96d37bb2efda41848a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &215329804
@@ -2313,6 +2349,7 @@ MonoBehaviour:
   IsLocalPlayer: 0
   testPlayer: 1
   hurtColor: {fileID: 2100000, guid: 31e40e2279b99922e9f1c042288d0c30, type: 2}
+  isPlane: 0
   healthText: {fileID: 0}
 --- !u!136 &468232650
 CapsuleCollider:

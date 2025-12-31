@@ -47,6 +47,8 @@ namespace MFlight
         private float mouseX = 0f;
         private float mouseY = 0f;
 
+        private Quaternion initialLocalRotation;
+
         /// <summary>
         /// Get a point along the aircraft's boresight projected out to aimDistance meters.
         /// Useful for drawing a crosshair to aim fixed forward guns with, or to indicate what
@@ -94,11 +96,19 @@ namespace MFlight
             if (cam == null)
                 Debug.LogError(name + "MouseFlightController - No camera transform assigned!");
 
+            // initialLocalRotation = Quaternion.identity;
+
             // To work correctly, the entire rig must not be parented to anything.
             // When parented to something (such as an aircraft) it will inherit those
             // rotations causing unintended rotations as it gets dragged around.
+            // Hehehehaw
             transform.parent = null;
         }
+
+        // private void LateUpdate()
+        // {
+        //     transform.localRotation = initialLocalRotation;
+        // }
 
         private void Update()
         {

@@ -27,7 +27,7 @@ public class NetworkDestroyer : MonoBehaviourPun
             Debug.LogError("Object does not have a PhotonView component");
             return;
         }
-        
+        photonView.TransferOwnership(PhotonNetwork.MasterClient);
         if (PhotonNetwork.IsMasterClient)
         {
             // Directly destroy if the client is MasterClient

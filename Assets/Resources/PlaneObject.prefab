@@ -2514,6 +2514,11 @@ MonoBehaviour:
   planeLogic: {fileID: 5969768830683822901}
   EngineLocation: {fileID: 8925620405238715328}
   Flames: {fileID: 8764043878647920493, guid: 128c533f4b4654cedbdf1076c4a47803, type: 3}
+  PlaneExplosion: {fileID: 2433282508537954060, guid: 727432ed63572d828a039ccd50526e71, type: 3}
+  ExplosionCenter: {fileID: 2330135989075187396}
+  riderInfo: {fileID: 4425320756772923747}
+  MouseFlightRig: {fileID: 5756781039260197230}
+  MouseFlightHud: {fileID: 0}
 --- !u!114 &4425320756772923747
 MonoBehaviour:
   m_ObjectHideFlags: 0

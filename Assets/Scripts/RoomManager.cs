@@ -113,7 +113,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Spawning plane");
         Transform spawnPlanePoint = spawnPlanePoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-        PhotonNetwork.Instantiate(plane.name, spawnPlanePoint.position, Quaternion.identity);
+        PhotonNetwork.InstantiateRoomObject(plane.name, spawnPlanePoint.position, Quaternion.identity);
     }
 
     public void SetHashes()

@@ -119,14 +119,26 @@ public class Weapon : MonoBehaviour
             PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
             if(hit.transform.gameObject.GetComponent<Health>())
             {
+                // Kill
                 if(damage >= hit.transform.gameObject.GetComponent<Health>().health)
-                {
-                    //kill
-                    RoomManager.instance.kills++;
-                    RoomManager.instance.SetHashes();
-                    PhotonNetwork.LocalPlayer.AddScore(100);
-                }
+                {   
+                    // If the kill is from a Plane
+                    if (hit.transform.gameObject.GetComponent<Health>().isPlane)
+                    {
 
+                        int num_passangers = hit.transform.gameObject.GetComponent<RiderInfo>().riders.Count;
+                        RoomManager.instance.kills = RoomManager.instance.kills + num_passangers;
+                        RoomManager.instance.SetHashes();
+                        PhotonNetwork.LocalPlayer.AddScore(100 * num_passangers);
+                    }
+                    // Player
+                    else
+                    {          
+                        RoomManager.instance.kills++;
+                        RoomManager.instance.SetHashes();
+                        PhotonNetwork.LocalPlayer.AddScore(100);   
+                    }
+                }
                 hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage);
             }
 
