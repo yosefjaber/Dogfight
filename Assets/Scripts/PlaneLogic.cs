@@ -120,6 +120,11 @@ public class PlaneLogic : MonoBehaviour
         this.enabled = false;
         MouseFlightHud.SetActive(false);
         MouseFlightRig.SetActive(false);
+        DisableFlight();
+    }
+
+    public void DisableFlight()
+    {   
         plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(false);
         plane.GetComponent<Rigidbody>().useGravity = true;
         plane.GetComponent<Rigidbody>().linearDamping = 0.1f;

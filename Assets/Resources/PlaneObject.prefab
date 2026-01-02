@@ -2416,7 +2416,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
@@ -2513,7 +2513,7 @@ MonoBehaviour:
   PlaneObject: {fileID: 1064898015671995858}
   planeLogic: {fileID: 5969768830683822901}
   EngineLocation: {fileID: 8925620405238715328}
-  Flames: {fileID: 8764043878647920493, guid: 128c533f4b4654cedbdf1076c4a47803, type: 3}
+  Flames: {fileID: 6294508013172393196, guid: 99b59d62c0dda14b19b7a64944ffa17a, type: 3}
   PlaneExplosion: {fileID: 2433282508537954060, guid: 727432ed63572d828a039ccd50526e71, type: 3}
   ExplosionCenter: {fileID: 2330135989075187396}
   riderInfo: {fileID: 4425320756772923747}

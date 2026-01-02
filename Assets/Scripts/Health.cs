@@ -17,6 +17,8 @@ public class Health : MonoBehaviour
 
     private KillPlane killPlane;
 
+    private PhotonView photonView;
+
     [Header("UI")]
     public TextMeshProUGUI healthText;
 
@@ -26,6 +28,7 @@ public class Health : MonoBehaviour
         {
             killPlane = this.gameObject.GetComponent<KillPlane>();
         }
+        photonView = GetComponent<PhotonView>();
     }
 
 
@@ -55,7 +58,7 @@ public class Health : MonoBehaviour
         {
             if (isPlane && !blownUp)
             {
-                killPlane.BlowUpPlane();
+                killPlane.RequestBlowUp();
                 blownUp = true;
             }
             else

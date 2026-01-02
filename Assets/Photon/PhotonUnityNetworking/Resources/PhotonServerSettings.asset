@@ -60,6 +60,15 @@ MonoBehaviour:
   - SetDriver
   - SetGunner
   - RequestBlowUp
+  - BlowUpPlane
+  - BlowUpPlaneMaster
+  - Rpc_ExplodePlane
+  - Rpc_RequestBlowUp
+  - Rpc_StartBurning
+  - SetFlamesParent
+  - SpawnFlames
+  - Rpc_SetFlameParent
+  - StopPlane
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
