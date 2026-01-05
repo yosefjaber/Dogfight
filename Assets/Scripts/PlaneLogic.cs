@@ -30,6 +30,7 @@ public class PlaneLogic : MonoBehaviour
     private float reloadTimeCounter = 0f;
     public PhotonView photonView;
     public RiderInfo riderInfo;
+    public bool blownUp = false;
 
     [HideInInspector]
     public GameObject Pilot;
@@ -45,39 +46,42 @@ public class PlaneLogic : MonoBehaviour
 
     private void Update() 
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (!blownUp)
         {
-            ExitPilot();
-        }
-
-        //Just a test to see if bomb drops
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Log("Drop Bomb");
-            bombLogic.dropBomb();
-        }
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            if(backCamera.activeSelf)
+            if(Input.GetKeyDown(KeyCode.E))
             {
-                backCamera.SetActive(false);
-                planeCamera.SetActive(true);
+                ExitPilot();
             }
-            else
-            {
-                backCamera.SetActive(true);
-                planeCamera.SetActive(false);
-            }
-        }
 
-        //Shoot
-        if(Input.GetMouseButton(0) && (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo) > 0)
-        {
-            //Timer in shoot so no need to worry about rate of fire
-            leftAirplaneGun.Shoot();
-            rightAirplaneGun.Shoot();
-            planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
+            //Just a test to see if bomb drops
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                Debug.Log("Drop Bomb");
+                bombLogic.dropBomb();
+            }
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                if(backCamera.activeSelf)
+                {
+                    backCamera.SetActive(false);
+                    planeCamera.SetActive(true);
+                }
+                else
+                {
+                    backCamera.SetActive(true);
+                    planeCamera.SetActive(false);
+                }
+            }
+
+            //Shoot
+            if(Input.GetMouseButton(0) && (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo) > 0)
+            {
+                //Timer in shoot so no need to worry about rate of fire
+                leftAirplaneGun.Shoot();
+                rightAirplaneGun.Shoot();
+                planeAmmoText.text = (leftAirplaneGun.currentAmmo + rightAirplaneGun.currentAmmo).ToString() + "/" + maxAmmo.ToString();
+            }
         }
     }
     

@@ -61,7 +61,7 @@ public class Health : MonoBehaviour
                 killPlane.RequestBlowUp();
                 blownUp = true;
             }
-            else
+            else if (!isPlane)
             {
                 if (IsLocalPlayer)
                 {
@@ -77,6 +77,11 @@ public class Health : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Die()
+    {
+        TakeDamage(health + 100);
     }
 
     private void ResetColor()

@@ -22,6 +22,7 @@ public class KillPlane : MonoBehaviour
     public GameObject MouseFlightHud;
     private GameObject pilot;
     private GameObject flames;
+    private bool blownUp;
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -36,9 +37,10 @@ public class KillPlane : MonoBehaviour
     void Update()
     {
         // Debug.Log("Velocity: " + rb.linearVelocity);
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) && !blownUp)
         {
             RequestBlowUp();
+            blownUp = true;
         }
     }
 
@@ -48,7 +50,15 @@ public class KillPlane : MonoBehaviour
             Debug.LogError("Phton view of plane is not mine");
             return;
         }
+        //photonView.RPC("TurnOnPlaneLogic", RpcTarget.All);
         photonView.RPC("Rpc_RequestBlowUp", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    private void TurnOnPlaneLogic()
+    {
+        planeLogic.enabled = true;
+        planeLogic.blownUp = true;
     }
 
     [PunRPC]
@@ -62,6 +72,14 @@ public class KillPlane : MonoBehaviour
 
         Vector3 linVel = rb.linearVelocity;
         Vector3 angVel = rb.angularVelocity;
+
+        // Disable flight
+        if(riderInfo.Driver != null)
+        {
+            PhotonView pv = riderInfo.Driver.GetComponent<PhotonView>();
+            Photon.Realtime.Player pilotPlayer = pv.Owner;
+            photonView.RPC("StopPlane", pilotPlayer);   
+        }
 
         // Tell everyone to start burning
         photonView.RPC("Rpc_StartBurning", RpcTarget.All, PhotonNetwork.Time);
@@ -108,11 +126,6 @@ public class KillPlane : MonoBehaviour
     [PunRPC]
     private void Rpc_StartBurning(double startTime)
     {
-        // Disable flight
-        PhotonView pv = riderInfo.Driver.GetComponent<PhotonView>();
-        Photon.Realtime.Player pilotPlayer = pv.Owner;
-        photonView.RPC("StopPlane", pilotPlayer);
-
         // Calculate remaining time using Photon time
         double elapsed = PhotonNetwork.Time - startTime;
         float remaining = Mathf.Max(0f, 5f - (float)elapsed);
@@ -138,106 +151,16 @@ public class KillPlane : MonoBehaviour
 
         Destroy(flames);
         Destroy(PlaneObject);
+
+        KillAllPassangers();
     }
 
-    [PunRPC]
-    private void Rpc_ExplodePlane()
+    private void KillAllPassangers()
     {
-        // Kill driver if present
-        if (riderInfo != null && riderInfo.IsDriver())
+        foreach (GameObject Rider in riderInfo.riders)
         {
-            riderInfo.photonView.RPC("PopDriver", RpcTarget.All);
+            Rider.SetActive(true);
+            Rider.GetComponent<Health>().Die();
         }
-
-        PhotonNetwork.InstantiateRoomObject(
-            PlaneExplosion.name,
-            ExplosionCenter.position,
-            ExplosionCenter.rotation
-        );
-
-        if (flames != null)
-            PhotonNetwork.Destroy(flames);
-
-        // IMPORTANT: destroy the object with the PhotonView
-        if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.Destroy(photonView.gameObject);
     }
-
-
-
-
-
-
-    // public void RequestBlowUp()
-    // {
-    //     photonView.RPC("BlowUpPlane", RpcTarget.All);
-    //     photonView.RPC("BlowUpPlaneMaster", RpcTarget.MasterClient);
-    // }
-
-    // [PunRPC]
-    // private void BlowUpPlane()
-    // {
-    //     Debug.Log("Time to blow up");
-    // }
-
-    // [PunRPC]
-    // private void BlowUpPlaneMaster()
-    // {
-    //     if (!PhotonNetwork.IsMasterClient)
-    //     {
-    //         Debug.LogError("Blow Up Plane called on Non Master Client");
-    //         return;
-    //     }
-    //     Vector3 linearVelocity = rb.linearVelocity;
-    //     Vector3 angularVelocity = rb.angularVelocity;
-    //     plane.GetComponent<MFlight.Demo.Plane>().SetEnabledState(false);
-    //     planeLogic.enabled = false;
-    //     rb.useGravity = true;
-    //     rb.linearDamping = 0f;
-    //     rb.angularDamping = 0f;
-    //     rb.linearVelocity = linearVelocity;
-    //     rb.angularVelocity = angularVelocity;
-
-    //     flames = PhotonNetwork.InstantiateRoomObject(Flames.name, EngineLocation.transform.position, EngineLocation.transform.rotation);
-    //     flames.transform.SetParent(EngineLocation.transform);
-
-    //     ActionScheduler.Instance.InvokeAction(ExplodePlane, 5f);
-    // }
-
-    // // Set off explosion and kill all players onboard
-    // private void ExplodePlane()
-    // {
-    //     if (riderInfo.IsDriver())
-    //     {
-    //         riderInfo.photonView.RPC("PopDriver", RpcTarget.All);
-    //     }
-
-    //     GameObject planeExplosion = PhotonNetwork.InstantiateRoomObject(PlaneExplosion.name, ExplosionCenter.position, ExplosionCenter.rotation);
-    //     PhotonNetwork.Destroy(photonView.gameObject);
-    //     PhotonNetwork.Destroy(PlaneObject);
-    //     PhotonNetwork.Destroy(flames);
-
-    //     ActionScheduler.Instance.InvokeAction(EnablePilot, 5f);
-    // }
-
-    // private void EnablePilot()
-    // {
-    //     NetworkDestroyer.Instance.RequestEnable(planeLogic.Pilot);
-    //     if (planeLogic.Pilot.GetComponent<Health>().IsLocalPlayer)
-    //     {
-    //         RoomManager.instance.SpawnPlayer();
-    //         RoomManager.instance.deaths++;
-    //         RoomManager.instance.SetHashes();
-    //         PhotonNetwork.LocalPlayer.AddScore(-100);
-    //     }
-    // }
-
-    // // This function sounds so messed up im so sorry
-    // private void KillRiders()
-    // {
-    //     foreach (GameObject rider in riderInfo.riders)
-    //     {
-    //         rider.GetComponent<Health>().health = 0;
-    //     }
-    // }
 }
