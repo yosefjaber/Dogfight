@@ -2251,6 +2251,7 @@ MonoBehaviour:
   reloadTime: 2
   photonView: {fileID: 389333318044411463}
   riderInfo: {fileID: 4425320756772923747}
+  blownUp: 0
   Pilot: {fileID: 0}
 --- !u!114 &9057227840643584998
 MonoBehaviour:
