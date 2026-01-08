@@ -149,18 +149,25 @@ public class KillPlane : MonoBehaviour
             ExplosionCenter.rotation
         );
 
+        ActionScheduler.Instance.InvokeAction(CleanUp, 2.5f);
+
         Destroy(flames);
         Destroy(PlaneObject);
-
-        KillAllPassangers();
     }
 
-    private void KillAllPassangers()
+    private void CleanUp()
     {
-        foreach (GameObject Rider in riderInfo.riders)
+        Debug.LogError("Clean up time!");
+
+        if (MouseFlightRig != null)
         {
-            Rider.SetActive(true);
-            Rider.GetComponent<Health>().Die();
+            Destroy(MouseFlightRig);
+        }
+
+        foreach (GameObject rider in riderInfo.riders)
+        {
+            rider.SetActive(true);
+            rider.GetComponent<Health>().Die();
         }
     }
 }
